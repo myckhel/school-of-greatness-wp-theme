@@ -52,6 +52,14 @@ $theme_options_data = get_theme_mods();
 			<?php if ( ! empty( $_GET['gglcptch_error'] ) ) : ?>
 				<?php echo '<p class="message message-error">' . esc_html__( 'You have entered an incorrect reCAPTCHA value.', 'eduma' ) . '</p>'; ?>
 			<?php endif; ?>
+			<!-- edit -->
+			<div class="thim-login">
+				<?php if ( is_active_sidebar( 'register-widget-manual' ) ) : ?>
+					<ul id="sidebar" class="text-center col">
+						<?php dynamic_sidebar( 'register-widget-manual' ); ?>
+					</ul>
+				<?php endif; ?>
+			</div>
 
 			<div class="thim-login form-submission-register">
 				<h2 class="title"><?php esc_html_e( 'Register', 'eduma' ); ?></h2>
@@ -262,4 +270,3 @@ $theme_options_data = get_theme_mods();
 		</div>
 	</div>
 </div>
-

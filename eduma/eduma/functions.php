@@ -222,6 +222,15 @@ if ( ! function_exists( 'thim_widgets_inits' ) ) {
 			'after_title'   => '</h4>',
 		) );
 
+		// MOD ADDED
+    register_sidebar(
+        array(
+        'name'          => 'register widget manual',
+        'id'            => 'register-widget-manual',
+        'description'   => 'register widget'
+        )
+    );
+
 		/**
 		 * Feature create sidebar in wp-admin.
 		 * Do not remove this.

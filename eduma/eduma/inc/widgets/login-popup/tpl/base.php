@@ -130,6 +130,13 @@
 
 			<?php if ( $registration_enabled ): ?>
 				<div class="thim-register">
+					<?php if ( is_active_sidebar( 'register-widget-manual' ) ) : ?>
+						<ul id="sidebar" class="text-center col">
+							<?php dynamic_sidebar( 'register-widget-manual' ); ?>
+						</ul>
+					<?php endif; ?>
+				</div>
+				<div class="thim-register">
 					<?php
 					$register_redirect_option = get_theme_mod( 'thim_register_redirect', false );
 
