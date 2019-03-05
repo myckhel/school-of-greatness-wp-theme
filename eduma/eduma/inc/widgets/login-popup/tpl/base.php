@@ -172,6 +172,18 @@
 							<input placeholder="<?php esc_attr_e( 'Email', 'eduma' ); ?>" type="email" name="user_email" class="input required" />
 						</p>
 
+						<p>
+							<label>Signup as</label>
+							<select style="margin-bottom: 20px;" type="text" placeholder="<?php esc_attr_e( 'Signup as', 'eduma' ); ?>" id="field_2" class="input required" name="field_2" aria-required="true" aria-labelledby="field_2-1" aria-describedby="field_2-3">
+								<option selected="selected" value="individual">individual</option>
+								<option value="Corporation">Corporation</option>
+								<option value="College">College</option>
+								<option value="Church">Church</option>
+								<option value="Government">Government</option>
+								<option value="Association">Association</option>
+							</select>
+						</p>
+
 						<?php if ( get_theme_mod( 'thim_auto_login', true ) ) { ?>
 							<p>
 								<input placeholder="<?php esc_attr_e( 'Password', 'eduma' ); ?>" type="password" name="password" class="input required" />
