@@ -75,17 +75,57 @@ $theme_options_data = get_theme_mods();
 						<input placeholder="<?php esc_attr_e( 'Email', 'eduma' ); ?>" type="email" name="user_email" class="input required" />
 					</p>
 
-					<p>
-						<label>Signup as</label>
-						<select style="margin-bottom: 20px;" type="text" placeholder="<?php esc_attr_e( 'Signup as', 'eduma' ); ?>" id="field_2" class="input required" name="field_2" aria-required="true" aria-labelledby="field_2-1" aria-describedby="field_2-3">
-							<option selected="selected" value="individual">individual</option>
-							<option value="Corporation">Corporation</option>
-							<option value="College">College</option>
-							<option value="Church">Church</option>
-							<option value="Government">Government</option>
-							<option value="Association">Association</option>
-						</select>
-					</p>
+					<!-- start edit -->
+					<?php
+
+					/**
+					 * Fires and displays any extra member registration details fields.
+					 *
+					 * @since 1.9.0
+					 */
+					do_action( 'bp_account_details_fields' ); ?>
+
+					<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
+
+					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
+
+						<div<?php bp_field_css_class( 'editfield' ); ?>>
+							<fieldset>
+
+							<?php
+							$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
+							if($field_type->category != "Single Fields"):
+							$field_type->edit_field_html();
+							// var_dump($field_type->category);
+						endif;
+
+							/**
+							 * Fires before the display of the visibility options for xprofile fields.
+							 *
+							 * @since 1.7.0
+							 */
+							do_action( 'bp_custom_profile_edit_fields_pre_visibility' );
+
+							 ?>
+
+							<?php
+
+							/**
+							 * Fires after the display of the visibility options for xprofile fields.
+							 *
+							 * @since 1.1.0
+							 */
+							do_action( 'bp_custom_profile_edit_fields' ); ?>
+
+							</fieldset>
+						</div>
+
+					<?php endwhile; ?>
+
+					<input placeholder="" type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
+
+					<?php endwhile; endif; endif; ?>
+					<!-- end edit -->
 
 					<?php if ( get_theme_mod( 'thim_auto_login', true ) ) { ?>
 						<p>
