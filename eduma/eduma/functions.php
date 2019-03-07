@@ -496,3 +496,26 @@ function xxx( $x ) {
 	}
 	echo '</pre>';
 }
+<<<<<<< HEAD
+=======
+
+add_action('admin_init', 'disable_dashboard');
+
+function disable_dashboard() {
+    if (!is_user_logged_in()) {
+        return null;
+    }
+    if (!current_user_can('administrator') && is_admin()) {
+        wp_redirect(home_url());
+        exit;
+    }
+}
+
+add_action('admin_init', 'disable_admin_bar');
+
+function disable_admin_bar() {
+    if (current_user_can('subscriber')) {
+        show_admin_bar(false);
+    }
+}
+>>>>>>> 3968818c0b5b2198987b2ed1a9eca8a6f766ad66
