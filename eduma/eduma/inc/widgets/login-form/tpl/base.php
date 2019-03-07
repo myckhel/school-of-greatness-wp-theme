@@ -52,6 +52,7 @@ $theme_options_data = get_theme_mods();
 			<?php if ( ! empty( $_GET['gglcptch_error'] ) ) : ?>
 				<?php echo '<p class="message message-error">' . esc_html__( 'You have entered an incorrect reCAPTCHA value.', 'eduma' ) . '</p>'; ?>
 			<?php endif; ?>
+
 			<!-- edit -->
 			<div class="thim-login">
 				<?php if ( is_active_sidebar( 'register-widget-manual' ) ) : ?>
@@ -60,6 +61,7 @@ $theme_options_data = get_theme_mods();
 					</ul>
 				<?php endif; ?>
 			</div>
+			<!-- edit -->
 
 			<div class="thim-login form-submission-register">
 				<h2 class="title"><?php esc_html_e( 'Register', 'eduma' ); ?></h2>
@@ -95,9 +97,8 @@ $theme_options_data = get_theme_mods();
 							<?php
 							$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
 							if($field_type->category != "Single Fields"):
-							$field_type->edit_field_html();
-							// var_dump($field_type->category);
-						endif;
+								$field_type->edit_field_html();
+							endif;
 
 							/**
 							 * Fires before the display of the visibility options for xprofile fields.
