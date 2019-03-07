@@ -497,33 +497,22 @@ function xxx( $x ) {
 	echo '</pre>';
 }
 
+add_action('admin_init', 'disable_dashboard');
 
-function remove_menus(){
-
-
-
-remove_menu_page( 'index.php' );                 //Dashboard
-
-remove_menu_page( 'edit.php' );                   //Posts
-
-remove_menu_page( 'upload.php' );                 //Media
-
-remove_menu_page( 'edit.php?post_type=page' );   //Pages
-
-remove_menu_page( 'edit-comments.php' );         //Comments
-
-remove_menu_page( 'themes.php' );                 //Appearance
-
-remove_menu_page( 'plugins.php' );               //Plugins
-
-remove_menu_page( 'users.php' );                 //Users
-
-remove_menu_page( 'tools.php' );                 //Tools
-
-remove_menu_page( 'options-general.php' );       //Settings
-
-
-
+function disable_dashboard() {
+    if (!is_user_logged_in()) {
+        return null;
+    }
+    if (!current_user_can('administrator') && is_admin()) {
+        wp_redirect(home_url());
+        exit;
+    }
 }
 
-add_action( 'admin_menu', 'remove_menus' );
+add_action('admin_init', 'disable_admin_bar');
+
+function disable_admin_bar() {
+    if (current_user_can('subscriber')) {
+        show_admin_bar(false);
+    }
+}
