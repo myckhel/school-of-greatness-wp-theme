@@ -13,16 +13,15 @@
  * @see     https://docs.woothemes.com/document/template-structure/
  * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 3.4.0
+ * @version 3.5.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+do_action( 'woocommerce_before_lost_password_form' );
 ?>
-
-<?php wc_print_notices(); ?>
 <div class="reset_password">
     <h2><?php esc_attr_e( 'Get Your Password', 'eduma' ); ?></h2>
     <form method="post" class="lost_reset_password">
@@ -62,3 +61,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     </form>
 </div>
+<?php
+do_action( 'woocommerce_after_lost_password_form' );

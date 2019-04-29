@@ -7,7 +7,7 @@
 
 define( 'THIM_DIR', trailingslashit( get_template_directory() ) );
 define( 'THIM_URI', trailingslashit( get_template_directory_uri() ) );
-define( 'THIM_THEME_VERSION', '3.6.1' );
+define( 'THIM_THEME_VERSION', '4.0.2' );
 
 /**
  * Set the content width based on the theme's design and stylesheet.
@@ -85,6 +85,77 @@ if ( ! function_exists( 'thim_setup' ) ) :
 			'gallery',
 			'audio'
 		) );
+
+        // Add support for Block Styles.
+		add_theme_support( 'wp-block-styles' );
+
+        // Add support for editor styles.
+		add_theme_support( 'editor-styles' );
+
+        // Enqueue editor styles.
+		add_editor_style( 'style-editor.css' );
+
+        // Add support for full and wide align images.
+		add_theme_support( 'align-wide' );
+
+        // Add support for responsive embedded content.
+        add_theme_support( 'responsive-embeds' );
+
+        // Editor color palette.
+		add_theme_support( 'editor-color-palette', array(
+			array(
+				'name'  => esc_html__( 'Primary Color', 'eduma' ),
+				'slug'  => 'primary',
+				'color' => get_theme_mod( 'thim_body_primary_color', '#ffb606' ),
+			),
+			array(
+				'name'  => esc_html__( 'Title Color', 'eduma' ),
+				'slug'  => 'title',
+				'color' => get_theme_mod( 'thim_font_title_color', '#333' ),
+			),
+			array(
+				'name'  => esc_html__( 'Sub Title Color', 'eduma' ),
+				'slug'  => 'sub-title',
+				'color' => '#999',
+			),
+			array(
+				'name'  => esc_html__( 'Border Color', 'eduma' ),
+				'slug'  => 'border-input',
+				'color' => '#ddd',
+			),
+		) );
+
+        // Add custom editor font sizes.
+        add_theme_support(
+            'editor-font-sizes',
+            array(
+                array(
+                    'name'      => __( 'Small', 'eduma' ),
+                    'shortName' => __( 'S', 'eduma' ),
+                    'size'      => 13,
+                    'slug'      => 'small',
+                ),
+                array(
+                    'name'      => __( 'Normal', 'eduma' ),
+                    'shortName' => __( 'M', 'eduma' ),
+                    'size'      => 15,
+                    'slug'      => 'normal',
+                ),
+                array(
+                    'name'      => __( 'Large', 'eduma' ),
+                    'shortName' => __( 'L', 'eduma' ),
+                    'size'      => 28,
+                    'slug'      => 'large',
+                ),
+                array(
+                    'name'      => __( 'Huge', 'eduma' ),
+                    'shortName' => __( 'XL', 'eduma' ),
+                    'size'      => 36,
+                    'slug'      => 'huge',
+                ),
+            )
+        );
+
 	}
 endif; // thim_setup
 add_action( 'after_setup_theme', 'thim_setup' );
@@ -156,15 +227,17 @@ if ( ! function_exists( 'thim_widgets_inits' ) ) {
 			'after_title'   => '</h4>',
 		) );
 
-		register_sidebar( array(
-			'name'          => esc_html__( 'Footer Bottom', 'eduma' ),
-			'id'            => 'footer_bottom',
-			'description'   => esc_html__( 'Footer Bottom Sidebar', 'eduma' ),
-			'before_widget' => '<aside id="%1$s" class="widget %2$s footer_bottom_widget">',
-			'after_widget'  => '</aside>',
-			'before_title'  => '<h4 class="widget-title">',
-			'after_title'   => '</h4>',
-		) );
+		if ( 'new-1' != get_theme_mod( 'thim_layout_content_page', 'normal' ) || 'header_v4' != get_theme_mod( 'thim_header_style', 'header_v1' ) ) {
+			register_sidebar( array(
+				'name'          => esc_html__( 'Footer Bottom', 'eduma' ),
+				'id'            => 'footer_bottom',
+				'description'   => esc_html__( 'Footer Bottom Sidebar', 'eduma' ),
+				'before_widget' => '<aside id="%1$s" class="widget %2$s footer_bottom_widget">',
+				'after_widget'  => '</aside>',
+				'before_title'  => '<h4 class="widget-title">',
+				'after_title'   => '</h4>',
+			) );
+		}
 
 		register_sidebar( array(
 			'name'          => esc_html__( 'Copyright', 'eduma' ),
@@ -222,15 +295,6 @@ if ( ! function_exists( 'thim_widgets_inits' ) ) {
 			'after_title'   => '</h4>',
 		) );
 
-		// MOD ADDED
-    register_sidebar(
-        array(
-        'name'          => 'register widget manual',
-        'id'            => 'register-widget-manual',
-        'description'   => 'register widget'
-        )
-    );
-
 		/**
 		 * Feature create sidebar in wp-admin.
 		 * Do not remove this.
@@ -274,6 +338,8 @@ if ( ! function_exists( 'thim_styles' ) ) {
 		$page_builder = get_theme_mod( 'thim_page_builder_chosen', '' );
 		if ( $page_builder === 'visual_composer' ) {
 			wp_enqueue_style( 'thim-custom-vc', THIM_URI . 'assets/css/custom-vc.css', array(), THIM_THEME_VERSION );
+		} else if ( $page_builder == 'elementor' ) {
+			wp_enqueue_style( 'thim-custom-el', THIM_URI . 'assets/css/custom-el.css', array(), THIM_THEME_VERSION );
 		}
 
 		if ( is_multisite() ) {
@@ -301,6 +367,7 @@ if ( ! function_exists( 'thim_scripts' ) ) {
 
 		// New script update from resca,sailing
 		wp_enqueue_script( 'thim-main', THIM_URI . 'assets/js/main.min.js', array( 'jquery' ), THIM_THEME_VERSION, true );
+
 
 		if ( get_theme_mod( 'thim_smooth_scroll', true ) ) {
 			wp_enqueue_script( 'thim-smooth-scroll', THIM_URI . 'assets/js/smooth_scroll.min.js', array( 'jquery' ), THIM_THEME_VERSION, true );
@@ -364,10 +431,6 @@ if ( ! function_exists( 'thim_scripts' ) ) {
 			wp_dequeue_script( 'thim-event-countdown-plugin-js' );
 			wp_dequeue_script( 'thim-event-countdown-js' );
 			wp_dequeue_script( 'tp-event-auth' );
-
-			if ( ! is_user_logged_in() ) {
-				wp_dequeue_style( 'dashicons' );
-			}
 		}
 
 		//Plugin tp-event
@@ -473,6 +536,10 @@ require_once THIM_DIR . 'inc/header/logo-mobile.php';
 //Visual composer shortcodes
 if ( class_exists( 'Vc_Manager' ) && thim_plugin_active( 'js_composer/js_composer.php' ) ) {
 	require THIM_DIR . 'vc-shortcodes/vc-shortcodes.php';
+}
+
+if ( thim_plugin_active( 'elementor/elementor.php' ) ) {
+	require_once THIM_DIR . 'elementor-addons/elementor-addons.php';
 }
 
 // Remove references to SiteOrigin Premium

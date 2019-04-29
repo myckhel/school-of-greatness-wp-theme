@@ -52,11 +52,11 @@ $classes[] = 'col-sm-12';
 				?>
 				<header class="entry-header">
 					<?php
-					if ( !isset( $theme_options_data['thim_show_date'] ) || $theme_options_data['thim_show_date'] == 1 ) {
+					if ( ! isset( $theme_options_data['thim_show_date'] ) || $theme_options_data['thim_show_date'] == 1 ) {
 						?>
 						<div class="date-meta">
 							<?php
-							if ( !empty( $theme_options_data['thim_blog_display_year'] ) ) {
+							if ( ! empty( $theme_options_data['thim_blog_display_year'] ) ) {
 								echo get_the_date( 'd' ) . '<i>' . get_the_date( 'M, Y' ) . '</i>';
 							} else {
 								echo get_the_date( "d\<\i\>\ F\<\/\i\>\ " );
@@ -84,11 +84,11 @@ $classes[] = 'col-sm-12';
 				?>
 				<header class="entry-header">
 					<?php
-					if ( !isset( $theme_options_data['thim_show_date'] ) || $theme_options_data['thim_show_date'] == 1 ) {
+					if ( ! isset( $theme_options_data['thim_show_date'] ) || $theme_options_data['thim_show_date'] == 1 ) {
 						?>
 						<div class="date-meta">
 							<?php
-							if ( !empty( $theme_options_data['thim_blog_display_year'] ) ) {
+							if ( ! empty( $theme_options_data['thim_blog_display_year'] ) ) {
 								echo get_the_date( 'd' ) . '<i>' . get_the_date( 'M, Y' ) . '</i>';
 							} else {
 								echo get_the_date( "d\<\i\>\ F\<\/\i\>\ " );

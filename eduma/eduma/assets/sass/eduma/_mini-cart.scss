@@ -6,9 +6,15 @@
 }
 .widget_shopping_cart {
     position: relative;
+    .widget-title {
+        display: none;
+    }
     .minicart_hover {
         margin-top: 0;
         margin-bottom: 0;
+        display: inline-block;
+        padding: 11px 15px 29px 10px;
+
         .cart-items-number {
             display: block;
             position: relative;
@@ -159,13 +165,12 @@
     }
 }
 
-
 body:not(.woocommerce):not(.woocommerce-page) .widget_shopping_cart{
     display: none;
     position: relative;
     .widget_shopping_cart_content {
         position: absolute;
-        background: #ffffff;
+        background: #fff;
         padding: 10px 15px;
         right: 0;
         width: 280px;

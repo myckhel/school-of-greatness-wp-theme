@@ -48,7 +48,7 @@ do_action( 'learn-press/before-single-course' );
 
             <div class="col-md-9 content-single">
 
-                <div id="lp-single-course" class="learnpress-content learn-press">
+                <div class="learnpress-content learn-press">
 
                     <div class="header_single_content">
 

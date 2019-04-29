@@ -23,9 +23,6 @@ class Thim_Custom_WC_Widget_Cart extends WC_Widget_Cart {
 	var $woo_widget_name;
 
 	function widget( $args, $instance ) {
-		if ( is_cart() || is_checkout() ) {
-			//return;
-		}
 
 		$before_widget = $args['before_widget'];
 		$after_widget  = $args['after_widget'];
@@ -39,15 +36,14 @@ class Thim_Custom_WC_Widget_Cart extends WC_Widget_Cart {
 		list( $cart_items ) = thim_get_current_cart_info();
 		$hide_if_empty = empty( $instance['hide_if_empty'] ) ? 0 : 1;
 		if ( ! $hide_if_empty || $cart_items ) {
-			echo '<div class="minicart_hover" id="header-mini-cart">';
+			echo '<a class="minicart_hover" id="header-mini-cart" href="' . get_permalink( wc_get_page_id( 'cart' ) ) . '">';
 			echo '<span class="cart-items-number"><i class="fa fa-fw fa-shopping-cart"></i><span class="wrapper-items-number"><span class="items-number">' . $cart_items . '</span></span></span>';
 
 			echo '<div class="clear"></div>';
-			echo '</div>';
+			echo '</a>';
 			// Insert cart widget placeholder - code in woocommerce.js will update this on page load
 			echo '<div class="widget_shopping_cart_content" style="display: none;"></div>';
 		}
 		echo ent2ncr( $after_widget );
 	}
-
 }

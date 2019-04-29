@@ -1858,3 +1858,47 @@ li.product-category{
 		}
 	}
 }
+
+.product-grid {
+	.content__product .product__title {
+		padding-right: 0;
+	}
+	.woosales-counter {
+		.counter-group{
+			display: block;
+
+			.counter-block{
+				border-radius: unset;
+				margin: 0;
+				width: 25%;
+				height: auto;
+
+				.counter {
+					font-size: 25px;
+					margin: 0;
+					width: auto;
+
+					.number {
+						line-height: 49px;
+						background-color: #000;
+						color: #fff;
+						transition: all .4s;
+					}
+				}
+
+				.counter-caption {
+					text-align: left;
+				}
+			}
+		}
+	}
+}
+
+.woosalescountdown.woosalescountdown-single{
+	.counter-group {
+		margin: 15px auto;
+	}
+	.counter-block .counter .number {
+		color: #333;
+	}
+}

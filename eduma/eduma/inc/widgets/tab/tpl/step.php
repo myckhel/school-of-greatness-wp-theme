@@ -36,8 +36,8 @@ if ( $instance['tab'] ) {
 			$active = "class='" . $class . "'";
 		}
 		$bg_color = $tab["bg_title"] ? $tab["bg_title"] : '';
-        $style_bg = $bg_color ? 'style="background-color: '.$tab["bg_title"].'"' : '';
-		echo '<li role="presentation" ' . $active . '><a '.$style_bg.' href="#thim-widget-tab-' . $j . $rand . '"  role="tab" data-toggle="tab"><strong>' . $j . '</strong>' . $tab['title'] . '</a></li>';
+		$style_bg = $bg_color ? 'style="background-color: ' . $tab["bg_title"] . '"' : '';
+		echo '<li role="presentation" ' . $active . '><a ' . $style_bg . ' href="#thim-widget-tab-' . $j . $rand . '"  role="tab" data-toggle="tab"><strong>' . $j . '</strong>' . $tab['title'] . '</a></li>';
 		$j ++;
 	}
 }
@@ -52,12 +52,24 @@ if ( $instance['tab'] ) {
 		} else {
 			$content_active = '';
 		}
+
+		$rel    = 'nofollow';
+		$target = '_self';
+
+		if ( is_array( $tab['link'] ) ) {
+			$link   = $tab['link']['url'];
+			$rel    = $tab['link']['nofollow'] ? 'nofollow' : 'dofollow';
+			$target = $tab['link']['is_external'] ? '_blank' : '_self';
+		} else {
+			$link = $tab['link'];
+		}
+
 		echo ' <div role="tabpanel" class="tab-pane' . $content_active . '" id="thim-widget-tab-' . $k . $rand . '">';
-		echo  $tab['content'];
-		if( $tab["link"] ) {
-		    echo '<a href="' . $tab["link"] . '" class="readmore">' . esc_html__( 'Learn More', 'eduma' ) . ' <i class="lnr icon-arrow-right"></i></a>';
-        }
-		echo  '</div>';
+		echo $tab['content'];
+		if ( $tab["link"] ) {
+			echo '<a href="' . $link . '" class="readmore" target="' . $rel . '" rel="' . $target . '">' . esc_html__( 'Learn More', 'eduma' ) . ' <i class="lnr icon-arrow-right"></i></a>';
+		}
+		echo '</div>';
 		$k ++;
 	}
 }

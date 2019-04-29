@@ -75,7 +75,7 @@ if ( $twitter_id && $number && $consumer_key && $consumer_secret && $access_toke
 
         <?php
         if ( $instance['title'] <> '' ) {
-            echo ent2ncr( $args['before_title'] . $instance['title'] . '<i class="fa fa-twitter"></i>' . $args['after_title'] );
+            echo ent2ncr( $args['before_title'] . $instance['title'] . ' <i class="fa fa-twitter"></i>' . $args['after_title'] );
         }
 
         if ( $twitter && is_array( $twitter ) ) : ?>

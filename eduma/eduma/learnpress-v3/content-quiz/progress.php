@@ -16,6 +16,7 @@ defined( 'ABSPATH' ) || exit();
 
 $user        = LP_Global::user();
 $quiz        = LP_Global::course_item_quiz();
+$question    = LP_Global::quiz_question();
 $course_data = $user->get_course_data( get_the_ID() );
 $quiz_item   = $course_data->get_item_quiz( $quiz->get_id() );
 $quiz_data   = $user->get_quiz_data( $quiz->get_id() );
@@ -30,7 +31,6 @@ if ( false === $quiz->get_duration() ) {
 
 $result  = $quiz_data->get_results();
 $percent = $quiz_data->get_questions_answered( true );
-
 ?>
 
 <div class="quiz-progress quiz-clock">
@@ -40,7 +40,7 @@ $percent = $quiz_data->get_questions_answered( true );
             <span class="progress-number quiz-text">
                 <?php _e( 'Question', 'eduma' ); ?>
                 <span class="number">
-                    <?php echo sprintf( __( '%d/%d', 'eduma' ), $quiz->get_question_index( $quiz_data->get_current_question(), 1 ), $quiz_data->get_total_questions() ); ?>
+                    <?php echo sprintf( __( '%d/%d', 'eduma' ), $quiz->get_question_index( $question ? $question->get_id() : $quiz_data->get_current_question(), 1 ), $quiz_data->get_total_questions() ); ?>
                 </span>
             </span>
         </div>
@@ -48,11 +48,7 @@ $percent = $quiz_data->get_questions_answered( true );
             <i class="fa fa-clock-o"></i>
             <span class="quiz-text"><?php echo esc_html__( 'Time', 'eduma' ); ?></span>
             <span id="quiz-countdown" class="progress-number"> --:--:-- </span>
-            <span class="quiz-countdown-label quiz-text">
-			<?php
-            //echo (int)$remaining_time > 3599 ? esc_html__( '(h:m:s)', 'eduma' ) : esc_html__( '(m:s)', 'eduma' );
-            ?>
-		</span>
+            <span class="quiz-countdown-label quiz-text"></span>
         </div>
     </div>
 </div>

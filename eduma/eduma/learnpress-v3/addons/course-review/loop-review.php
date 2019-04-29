@@ -7,7 +7,7 @@
         <div class="review-text">
             <h4 class="author-name" itemprop="author">
                 <?php do_action( 'learn_press_before_review_username' ); ?>
-                <?php echo $review->user_login; ?>
+                <?php echo $review->display_name; ?>
                 <?php do_action( 'learn_press_after_review_username' ); ?>
             </h4>
 

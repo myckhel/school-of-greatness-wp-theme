@@ -92,7 +92,7 @@ class Thim_Customize_Options {
 			include $DIR . 'event-single.php';
 		}
 
-		if ( class_exists( 'LP_Addon_bbPress' && class_exists( 'bbPress' ) ) ) {
+		if ( class_exists( 'LP_Addon_bbPress' ) && class_exists( 'bbPress' ) ) {
 			include $DIR . 'forum.php';
 			include $DIR . 'forum-archive.php';
 		}
@@ -110,13 +110,13 @@ class Thim_Customize_Options {
 			include $DIR . 'product-single.php';
 		}
 
-		if (class_exists('THIM_Our_Team')){
+		if ( class_exists( 'THIM_Our_Team' ) ) {
 			include $DIR . 'team.php';
 			include $DIR . 'team-archive.php';
 			include $DIR . 'team-single.php';
 		}
 
-		if (class_exists('THIM_Testimonials')){
+		if ( class_exists( 'THIM_Testimonials' ) ) {
 			include $DIR . 'testimonials.php';
 			include $DIR . 'testimonials-archive.php';
 			include $DIR . 'testimonials-single.php';

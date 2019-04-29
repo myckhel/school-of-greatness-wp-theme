@@ -8,7 +8,7 @@ $text_align = ( isset($instance['image_alignment']) && '' != $instance['image_al
 $thim_animation .= thim_getCSSAnimation( $instance['css_animation'] );
 
 if ( $instance['image_link'] ) {
-	$link_before = '<a target=" ' . $target . '" href="' . $instance['image_link'] . '">';
+	$link_before = '<a target="' . $target . '" href="' . $instance['image_link'] . '">';
 	$after_link  = "</a>";
 }
 echo '<div class="single-image ' . $text_align . '">' . $link_before;

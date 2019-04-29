@@ -44,6 +44,7 @@ thim_customizer()->add_field(
 		'tooltip'  => esc_html__( 'Allows you to choose a layout to display for all pages on your site.', 'eduma' ),
 		'section'  => 'content_layout',
 		'priority' => 66,
+		'default'  => 'full-content',
 		'choices'  => array(
 			'sidebar-left'  => THIM_URI . 'images/layout/sidebar-left.jpg',
 			'full-content'  => THIM_URI . 'images/layout/body-full.jpg',

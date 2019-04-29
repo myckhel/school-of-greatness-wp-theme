@@ -1,13 +1,13 @@
 <?php
 
-$link         = $regency = '';
-$link_to_single = !empty( $instance['link_to_single'] ) ? true : false;
-$limit        = ( $instance['limit'] && '' <> $instance['limit'] ) ? (int) $instance['limit'] : 10;
-$item_visible = ( $instance['item_visible'] && '' <> $instance['item_visible'] ) ? (int) $instance['item_visible'] : 5;
-$item_time = ( $instance['pause_time'] && '' <> $instance['pause_time'] ) ? (int) $instance['pause_time'] : 5000;
-$activepadding = ($instance['activepadding'] && '' <> $instance['activepadding']) ? (int)$instance['activepadding'] : -45;
-$autoplay     = $instance['autoplay'] ? 1 : 0;
-$mousewheel   = $instance['mousewheel'] ? 1 : 0;
+$link           = $regency = '';
+$link_to_single = ! empty( $instance['link_to_single'] ) ? true : false;
+$limit          = ( $instance['limit'] && '' <> $instance['limit'] ) ? (int) $instance['limit'] : 10;
+$item_visible   = ( $instance['item_visible'] && '' <> $instance['item_visible'] ) ? (int) $instance['item_visible'] : 5;
+$item_time      = ( $instance['pause_time'] && '' <> $instance['pause_time'] ) ? (int) $instance['pause_time'] : 5000;
+$activepadding  = ( $instance['activepadding'] && '' <> $instance['activepadding'] ) ? (int) $instance['activepadding'] : - 45;
+$autoplay       = $instance['autoplay'] ? 1 : 0;
+$mousewheel     = $instance['mousewheel'] ? 1 : 0;
 
 $testomonial_args = array(
 	'post_type'           => 'testimonials',
@@ -27,22 +27,22 @@ if ( $testimonial->have_posts() ) {
 		$html .= '<div class="content">';
 
 		$html .= '<div class="description">' . get_the_content() . '</div>';
-        if( $link_to_single ) {
-            $html .= '<h3 class="title"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
-        }else if ( $link <> '' ) {
-            $html .= '<h3 class="title"><a href="' . $link . '">' . get_the_title() . '</a></h3>';
-        } else {
-            $html .= '<h3 class="title">_' . get_the_title() . ',</h3>';
-        }
-        $html .= '<div class="regency">' . esc_html( $regency ) . '</div>';
+		if ( $link_to_single ) {
+			$html .= '<h3 class="title"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
+		} else if ( $link <> '' ) {
+			$html .= '<h3 class="title"><a href="' . $link . '">' . get_the_title() . '</a></h3>';
+		} else {
+			$html .= '<h3 class="title">_' . get_the_title() . ',</h3>';
+		}
+		$html .= '<div class="regency">' . esc_html( $regency ) . '</div>';
 
 		$html .= '</div>';
-        if ( has_post_thumbnail() ) {
-            $html .= '<div class="image">';
-            $html .= thim_get_feature_image( get_post_thumbnail_id(), 'full', apply_filters( 'thim_testimonial_thumbnail_width', 100 ), apply_filters( 'thim_testimonial_thumbnail_height', 100 ) );
-            $html .= '</div>';
-        }
-        $html .= '</div>';
+		if ( has_post_thumbnail() ) {
+			$html .= '<div class="image">';
+			$html .= thim_get_feature_image( get_post_thumbnail_id(), 'full', apply_filters( 'thim_testimonial_thumbnail_width', 100 ), apply_filters( 'thim_testimonial_thumbnail_height', 100 ) );
+			$html .= '</div>';
+		}
+		$html .= '</div>';
 
 	endwhile;
 	$html .= '</div>';

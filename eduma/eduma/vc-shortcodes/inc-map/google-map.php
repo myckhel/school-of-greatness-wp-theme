@@ -83,7 +83,7 @@ vc_map( array(
 		array(
 			'type'        => 'number',
 			'admin_label' => true,
-			'heading'     => esc_html__( 'Number events display', 'eduma' ),
+			'heading'     => esc_html__( 'Zoom level', 'eduma' ),
 			'param_name'  => 'settings_zoom',
 			'std'         => '12',
 			'min'         => '0',

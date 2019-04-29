@@ -199,14 +199,14 @@ function thim_eduma_list_child_themes() {
 			'name'       => 'Eduma Child',
 			'slug'       => 'eduma-child',
 			'screenshot' => 'https://plugins.thimpress.com/downloads/images/eduma-child.png',
-			'source'     => 'https://plugins.thimpress.com/downloads/child-themes/eduma-child.zip',
+			'source'     => 'https://github.com/ThimPressWP/demo-data/raw/master/eduma/child-themes/eduma-child/eduma-child.zip',
 			'version'    => '1.0.0'
 		),
 		'eduma-child-kindergarten' => array(
 			'name'       => 'Eduma Child Kindergarten',
 			'slug'       => 'eduma-child-kindergarten',
 			'screenshot' => 'https://plugins.thimpress.com/downloads/images/eduma-child-kindergarten.png',
-			'source'     => 'https://plugins.thimpress.com/downloads/child-themes/eduma-child-kindergarten.zip',
+			'source'     => 'https://github.com/ThimPressWP/demo-data/raw/master/eduma/child-themes/eduma-child-kindergarten/eduma-child-kindergarten.zip',
 			'version'    => '1.1.0'
 		),
 	);

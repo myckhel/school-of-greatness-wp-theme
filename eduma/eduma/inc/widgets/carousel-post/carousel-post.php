@@ -115,33 +115,6 @@ class Thim_Carousel_Post_Widget extends Thim_Widget {
 		wp_enqueue_script( 'thim-owl-carousel' );
 	}
 
-	// Get list category
-//	function thim_get_categories() {
-//		$args         = array(
-//			'orderby' => 'id',
-//			'parent'  => 0
-//		);
-//		$items        = array();
-//		$items['all'] = 'All';
-//		$categories   = get_categories( $args );
-//		if ( isset( $categories ) ) {
-//			foreach ( $categories as $key => $cat ) {
-//				$items[$cat->cat_ID] = $cat->cat_name;
-//				$children            = get_term_children( $cat->term_id, $cat->taxonomy );
-//				if ( $children ) {
-//					foreach ( $children as $key => $child ) {
-//						$child_element                  = get_term_by( 'id', $child, $cat->taxonomy );
-//						$items[$child_element->term_id] = '--' . $child_element->name;
-//
-//					}
-//				}
-//			}
-//		}
-//
-//		return $items;
-//	}
-
-
 	//Get list post categories
 	function thim_get_post_categories( $parent = 0, $taxonomy = 'category', $child_prefix = '--', $level = 0, $force = false ) {
 		global $wpdb;
@@ -170,8 +143,6 @@ class Thim_Carousel_Post_Widget extends Thim_Widget {
 						}
 					}
 					$count ++;
-				}else{
-
 				}
 			}
 		}

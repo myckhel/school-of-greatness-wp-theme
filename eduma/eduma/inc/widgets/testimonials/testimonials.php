@@ -6,7 +6,7 @@ if ( class_exists( 'THIM_Testimonials' ) ) {
 				'testimonials',
 				esc_html__( 'Thim: Testimonials', 'eduma' ),
 				array(
-					'description'   => esc_html__( '', 'eduma' ),
+					'description'   => '',
 					'help'          => '',
 					'panels_groups' => array( 'thim_widget_group' ),
 					'panels_icon'   => 'thim-widget-icon thim-widget-icon-testimonials'

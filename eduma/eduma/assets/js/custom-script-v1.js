@@ -1140,7 +1140,7 @@ var woof_js_after_ajax_done;
 							$parent = $('.course-content');
 						$iframe.contents().find('.quiz-title, .back-to-course').remove();
 						$iframe.css('min-height', bodyHeight);
-						//console.log('load quiz')
+
 						$courseContent.addClass('loading').animate({
 							height: bodyHeight + 150
 						}, 400, function () {
@@ -1186,7 +1186,7 @@ var woof_js_after_ajax_done;
 								start_resize = true,
 								_resize = function () {
 									contentHeight = $content.outerHeight();
-									//console.log($video, contentHeight, $course_lesson.outerHeight());
+
 									$courseContent.addClass('loading').find('.thim-loading-container').remove();
 									$courseContent.animate({
 										height: contentHeight + 150
@@ -1211,7 +1211,6 @@ var woof_js_after_ajax_done;
 
 										video.onloadedmetadata = function() {
 											if( d == $video.length - 1 && !$(this).hasClass('loaded') ) {
-												console.log($(this).attr('class'), '112222222111');
 												if( start_resize === true ) {
 													_resize();
 												}
@@ -1247,7 +1246,6 @@ var woof_js_after_ajax_done;
 					}).addAction('learn_press_course_item_load_failed', function () {
 					alert();
 				}).addFilter('learn_press_load_lesson_content', function (a, item, link) {
-					console.log('12345');
 					return true;
 					if (item) {
 						if (item.get('type') == 'lp_quiz') {
@@ -2106,13 +2104,6 @@ var woof_js_after_ajax_done;
 		thim_min_height_carousel($('.thim-testimonial-carousel-kindergarten .item'));
 
 		thim_min_height_content_area();
-
-		// $(' .width-navigation .sub-menu.megacol').each(function (index, value) {
-		// 	var elem = $(value),
-		// 		child = elem.find('> li> .sub-menu'),
-		// 		elem_H = elem.height() - 25;
-		// 	child.css('min-height', elem_H);
-		// });
 
 		$(window).resize(function () {
 			$('.thim-carousel-instructors .instructor-item').css('min-height', 0);

@@ -8,6 +8,10 @@ if ( ! function_exists( 'thim_login_failed' ) ) {
 			return;
 		}
 
+		if( isset($_REQUEST['level']) && isset($_REQUEST['submit-checkout']) && isset($_REQUEST['username']) && isset($_REQUEST['password']) ) {
+			return;
+		}
+
 		if ( is_user_logged_in() ) {
 			return;
 		}
@@ -35,13 +39,11 @@ if ( ! function_exists( 'thim_login_failed' ) ) {
  * @param $errors
  */
 if ( ! function_exists( 'thim_register_failed' ) ) {
-	function thim_register_failed( $sanitized_user_login, $user_email, $errors ) {
+	function thim_register_failed( $errors ) {
 		// Prevent redirect in popup
 		if ( ! empty( $_POST['is_popup_register'] ) ) {
-			return;
+			return $errors;
 		}
-
-		$errors = apply_filters( 'registration_errors', $errors, $sanitized_user_login, $user_email );
 
 		if ( $errors->get_error_code() ) {
 
@@ -54,9 +56,11 @@ if ( ! function_exists( 'thim_register_failed' ) ) {
 			wp_redirect( $url );
 			exit;
 		}
+
+		return $errors;
 	}
 
-	add_action( 'register_post', 'thim_register_failed', 99, 3 );
+	add_action( 'registration_errors', 'thim_register_failed', 99, 3 );
 }
 
 /**
@@ -277,9 +281,9 @@ add_action( 'lostpassword_post', 'thim_reset_password_failed', 999 );
 if ( ! function_exists( 'thim_get_login_page_url' ) ) {
 	function thim_get_login_page_url() {
 
-		if ( ! thim_plugin_active( 'siteorigin-panels/siteorigin-panels.php' ) && ! thim_plugin_active( 'js_composer/js_composer.php' ) ) {
-			return wp_login_url();
-		}
+//		if ( ! thim_plugin_active( 'elementor/elementor.php' ) && ! thim_plugin_active( 'siteorigin-panels/siteorigin-panels.php' ) && ! thim_plugin_active( 'js_composer/js_composer.php' ) ) {
+//			return wp_login_url();
+//		}
 
 		if ( $page = get_option( 'thim_login_page' ) ) {
 			return get_permalink( $page );
@@ -328,8 +332,6 @@ if ( ! function_exists( 'thim_login_ajax_callback' ) ) {
 			foreach ( $login_data as $k => $v ) {
 				$_POST[ $k ] = $v;
 			}
-
-			//			$_POST['wp-submit'] = $login_data['wp-submit'];
 
 			$user_verify = wp_signon( array(), is_ssl() );
 
@@ -459,29 +461,29 @@ if ( ! function_exists( 'thim_register_ajax_callback' ) ) {
 			wp_send_json_error( $response_data );
 		} else {
 			if ( $has_auto_login ) {
-				wp_new_user_notification( $user_register, null, 'admin' );
+				// wp_new_user_notification( $user_register, null, 'admin' );
 
-//				$creds                  = array();
-//				$creds['user_login']    = $info['user_login'];
-//				$creds['user_password'] = $info['user_pass'];
-//
-//				$user_signon = wp_signon( $creds, false );
-//				if ( is_wp_error( $user_signon ) ) {
-//					$response_data = array(
-//						'message' => '<p class="message message-error">' . esc_html__( 'Wrong username or password.', 'eduma' ) . '</p>'
-//					);
-//
-//					wp_send_json_error( $response_data );
-//				} else {
-//					wp_set_current_user( $user_signon->ID );
-//					wp_set_auth_cookie( $user_signon->ID );
-//
-//					$response_data = array(
-//						'message' => '<p class="message message-success">' . esc_html__( 'Registration successful, redirecting...', 'eduma' ) . '</p>'
-//					);
-//
-//					wp_send_json_success( $response_data );
-//				}
+				//				$creds                  = array();
+				//				$creds['user_login']    = $info['user_login'];
+				//				$creds['user_password'] = $info['user_pass'];
+				//
+				//				$user_signon = wp_signon( $creds, false );
+				//				if ( is_wp_error( $user_signon ) ) {
+				//					$response_data = array(
+				//						'message' => '<p class="message message-error">' . esc_html__( 'Wrong username or password.', 'eduma' ) . '</p>'
+				//					);
+				//
+				//					wp_send_json_error( $response_data );
+				//				} else {
+				//					wp_set_current_user( $user_signon->ID );
+				//					wp_set_auth_cookie( $user_signon->ID );
+				//
+				//					$response_data = array(
+				//						'message' => '<p class="message message-success">' . esc_html__( 'Registration successful, redirecting...', 'eduma' ) . '</p>'
+				//					);
+				//
+				//					wp_send_json_success( $response_data );
+				//				}
 
 				wp_set_current_user( $user_register );
 				wp_set_auth_cookie( $user_register );
@@ -492,7 +494,7 @@ if ( ! function_exists( 'thim_register_ajax_callback' ) ) {
 
 				wp_send_json_success( $response_data );
 			} else {
-				wp_new_user_notification( $user_register, null, 'both' );
+				//				wp_new_user_notification( $user_register, null, 'both' );
 
 				$response_data = array(
 					'message' => '<p class="message message-success">' . esc_html__( 'Registration is successful. Confirmation will be e-mailed to you.', 'eduma' ) . '</p>'
@@ -552,7 +554,14 @@ if ( ! function_exists( 'thim_redirect_rp_url' ) ) {
 	}
 }
 
-// Remove default login page link in the email
+if ( ! function_exists( 'is_wpe' ) && ! function_exists( 'is_wpe_snapshot' ) ) {
+	add_action( 'init', 'thim_redirect_rp_url' );
+}
+
+/*
+ * Remove default login page link in the email
+ *
+ */
 function thim_remove_default_login_url( $url ) {
 	global $wp;
 
@@ -566,3 +575,34 @@ function thim_remove_default_login_url( $url ) {
 }
 
 add_filter( 'login_url', 'thim_remove_default_login_url', 1000 );
+
+/*
+ * Change new user email content
+ *
+ */
+if ( ! function_exists( 'thim_change_new_user_email_content' ) ) {
+	function thim_change_new_user_email_content( $wp_new_user_notification_email, $user ) {
+		if ( array_key_exists( 'message', $wp_new_user_notification_email ) ) {
+			$message = sprintf( __( 'Username: %s' ), $user->user_login ) . "\r\n\r\n";
+			$message .= __( 'To set your password, visit the following address:' ) . "\r\n\r\n";
+			$message .= '<' . network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ) . ">\r\n\r\n";
+
+			$message .= wp_login_url() . "\r\n";
+		}
+
+		return $wp_new_user_notification_email;
+	}
+
+	add_filter( 'wp_new_user_notification_email', 'thim_change_new_user_email_content', 15, 2 );
+}
+
+/*
+ * Add google captcha register check to register form ( multisite case )
+ */
+if ( is_multisite() && function_exists( 'gglcptch_register_check' ) ) {
+	global $gglcptch_ip_in_whitelist;
+
+	if ( ! $gglcptch_ip_in_whitelist ) {
+		add_action( 'registration_errors', 'gglcptch_register_check', 10, 1 );
+	}
+}

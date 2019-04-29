@@ -1464,7 +1464,7 @@ input[type=checkbox]:checked:before {
 		left: auto;
 	}
 
-	.menu-mobile-effect.navbar-toggle {
+	body.rtl .menu-mobile-effect.navbar-toggle {
 		left: 15px;
 		right: auto;
 	}
@@ -1845,100 +1845,76 @@ article .entry-header .entry-meta li:last-child {
 	margin-left: 30px;
 	margin-right: auto;
 }
-
-.counter-group .counter-block:last-child {
-	margin-left: 0;
-	margin-right: auto;
-}
-
 .thim-owl-carousel-post .owl-item .info .author, .thim-owl-carousel-post .owl-item .info .date {
 	padding: 0 20px 0 0;
 }
-
 .thim-owl-carousel-post .owl-item .info .date {
 	padding: 0 0 0 20px;
 }
-
 .thim-owl-carousel-post .owl-controls {
 	left: 15px;
 	right: auto;
 }
-
 .thim-owl-carousel-post .owl-controls .owl-prev, .thim-owl-carousel-post .owl-controls .owl-next {
 	margin-right: 10px;
 	margin-left: auto;
 }
-
 .sc_heading .line {
 	right: 0;
 	left: auto;
 }
-
 .sc_heading.text-right .line {
 	right: 0;
 	left: auto;
 }
-
 .sc_heading.text-center .line {
 	left: 0;
 	right: auto;
 }
-
 .sc_heading.text-left {
 	left: 0;
 	right: auto;
 }
-
 .thim-widget-accordion .panel-title {
 	padding-right: 25px;
 	padding-left: 0;
 }
-
 .thim-widget-accordion .panel-title a {
 	padding: 0 15px 0 10px;
 }
-
 .thim-widget-accordion .panel-title a:before {
 	right: 0;
 	left: auto;
 }
-
 .thim-widget-accordion .panel-title a:after {
 	float: left;
 	left: 10px;
 	right: auto;
 }
-
 .counter-box.about-us {
 	border-left: 1px solid #eee;
 	border-right: none;
 }
-
 .thim-carousel-course-categories .owl-carousel .owl-buttons .owl-prev, .thim-carousel-course-categories .owl-carousel .owl-buttons .owl-next {
 	right: auto;
 	left: 10px;
 }
-
 .thim-carousel-course-categories .owl-carousel .owl-buttons .owl-prev .fa, .thim-carousel-course-categories .owl-carousel .owl-buttons .owl-next .fa {
 	right: 0;
 	left: auto;
 }
-
 .thim-carousel-course-categories .owl-carousel .owl-buttons .owl-next {
 	right: 10px;
 	left: auto;
 }
-
 .thim-carousel-course-categories .owl-carousel:hover .owl-buttons .owl-prev .fa, .thim-carousel-course-categories .owl-carousel:hover .owl-buttons .owl-next .fa {
 	left: 0;
 	right: auto;
 }
-
 .thim-widget-tab .nav-tabs li a {
 	margin-left: 3px;
 	margin-right: auto;
 }
-
 .thim-widget-tab .nav-tabs li a .fa {
 	margin-left: 8px;
 	margin-right: auto;
@@ -3539,9 +3515,14 @@ form#lostpasswordform p input[type=submit] {
 		margin-left: auto;
 	}
 
-	.thim-testimonial-slider .slides-content .content {
+	.thim-testimonial-slider:not(.layout-slide-2) .slides-content .content {
 		margin-right: -30px;
 		margin-left: -30px;
+	}
+
+	.thim-testimonial-slider.layout-slide-2 .slides-content .content {
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.tp-event-content .tp-event-info {
@@ -3929,10 +3910,6 @@ body {
 
 .thim-language .lang-item.active:after {
 	padding-right: 5px;
-}
-
-.widget-area.sidebar-events .widget_book-event ul li .label {
-	float: right;
 }
 
 .widget-area.sidebar-events .widget_book-event ul li .value {
@@ -5041,11 +5018,6 @@ body.rtl.woocommerce div.product form.cart div.quantity, body.rtl.woocommerce di
 	float: right;
 }
 
-body.rtl .navbar-nav .tc-menu-depth-0.tc-menu-layout-column > .sub-menu {
-	left: 50%;
-	right: unset;
-}
-
 body.rtl .navbar-nav > li .sub-menu span.tc-icon {
 	margin-left: 10px;
 	margin-right: 0;
@@ -5100,6 +5072,19 @@ body.rtl .profile-container .profile-tabs .learn-press-subtab-content .lp-sub-me
 }
 body.rtl .profile-container .profile-tabs .learn-press-subtab-content .lp-sub-menu {
 	margin-right: 0;
+}
+body.rtl .switch-layout-container .thim-course-order {
+	margin-right: auto;
+	margin-left: 20px;
+}
+body.rtl #thim-popup-login.active.sign-up .thim-popup-inner{
+	transform: translatex(100%);
+}
+body.rtl .thim-carousel-list-instructors .instructor-item .info_ins>.row {
+	display: flex;
+}
+body.rtl .thim_tabs_slider .thim_content_tabs .thim_content_item {
+	float: right;
 }
 @media (max-width: 767px) {
 	.thim-style-content-new-1 .course-summary #learn-press-course-curriculum ul.curriculum-sections .section-content .course-lesson .course-item-meta, .thim-style-content-new-1 .course-summary #learn-press-course-curriculum ul.curriculum-sections .section-content .course-quiz .course-item-meta {

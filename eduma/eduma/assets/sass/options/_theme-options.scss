@@ -64,11 +64,18 @@ h1, h2, h3, h4, h5, h6,
 #tab-course-review .course-rating .average-rating .rating-box .average-value,
 #tab-reviews .course-rating .average-rating .rating-box .average-value,
 .thim-widget-icon-box .wrapper-box-icon.has_custom_image:not(.overlay) .smicon-read,
+.elementor-widget-thim-icon-box .wrapper-box-icon.has_custom_image:not(.overlay) .smicon-read,
 .learn-press .tab-content .course-wishlist-box span.text,
 .woocommerce-MyAccount-content legend,
 .thim-font-heading,
 .thim-owl-carousel-post.thim-list-posts .read-more{
 	font-family: $thim_thim_font_title_font_family;
+}
+
+input[type=text], input[type=email], input[type=password], textarea {
+	&:focus {
+		border-color: $thim_thim_body_primary_color !important;
+	}
 }
 
 .loop-pagination li .page-numbers.next:before,
@@ -163,5 +170,25 @@ body,
 		h1 {
 			color: $thim_thim_maintenance_text_color;
 		}
+	}
+}
+
+.has-text-color {
+	&.has-primary-color {
+		color: $thim_thim_body_primary_color !important;
+	}
+
+	&.has-title-color {
+		color: $thim_thim_font_title_color !important;
+	}
+}
+
+.has-background {
+	&.has-primary-background-color {
+		background-color: $thim_thim_body_primary_color !important;
+	}
+
+	&.has-title-background-color {
+		background-color: $thim_thim_font_title_color !important;
 	}
 }

@@ -14,6 +14,23 @@ thim_customizer()->add_section(
     )
 );
 
+// Enable or Disable Page Title
+thim_customizer()->add_field(
+	array(
+		'id'          => 'thim_blog_display_year',
+		'type'        => 'switch',
+		'label'       => esc_html__( 'Display Year', 'eduma' ),
+		'tooltip'     => esc_html__( 'Display year on date of Blog.', 'eduma' ),
+		'section'     => 'blog_meta',
+		'default'     => false,
+		'priority'    => 20,
+		'choices'     => array(
+			true  	  => esc_html__( 'On', 'eduma' ),
+			false	  => esc_html__( 'Off', 'eduma' ),
+		),
+	)
+);
+
 // Enable or Disable Author Meta Tags
 thim_customizer()->add_field(
     array(
@@ -65,23 +82,6 @@ thim_customizer()->add_field(
     )
 );
 
-// Enable or Disable Tags Meta Tags
-//thim_customizer()->add_field(
-//    array(
-//        'id'          => 'show_tags_meta_tags',
-//        'type'        => 'switch',
-//        'label'       => esc_html__( 'Show Tags', 'eduma' ),
-//        'tooltip'     => esc_html__( 'Allows you to show tags meta tags to display at single post page.', 'eduma' ),
-//        'section'     => 'blog_meta',
-//        'default'     => true,
-//        'priority'    => 33,
-//        'choices'     => array(
-//            true  	  => esc_html__( 'Show', 'eduma' ),
-//            false	  => esc_html__( 'Hide', 'eduma' ),
-//        ),
-//    )
-//);
-
 //Enable or Disable Comments Meta Tags
 thim_customizer()->add_field(
     array(
@@ -95,23 +95,6 @@ thim_customizer()->add_field(
         'choices'  => array(
             true  	  => esc_html__( 'Show', 'eduma' ),
             false	  => esc_html__( 'Hide', 'eduma' ),
-        ),
-    )
-);
-
-// Enable or Disable Page Title
-thim_customizer()->add_field(
-    array(
-        'id'          => 'thim_blog_display_year',
-        'type'        => 'switch',
-        'label'       => esc_html__( 'Display Year', 'eduma' ),
-        'tooltip'     => esc_html__( 'Display year on date of Blog.', 'eduma' ),
-        'section'     => 'blog_meta',
-        'default'     => false,
-        'priority'    => 20,
-        'choices'     => array(
-            true  	  => esc_html__( 'On', 'eduma' ),
-            false	  => esc_html__( 'Off', 'eduma' ),
         ),
     )
 );

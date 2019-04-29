@@ -6,7 +6,7 @@
       margin-bottom: 30px;
       overflow: hidden;
       &:last-child {
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
       &:not(.has-post-thumbnail){
         .thim-course-content{
@@ -83,5 +83,13 @@
         }
       }
     }
+  }
+}
+
+.thim-widget-courses,
+.elementor-widget-thim-courses {
+  .course-wishlist-box,
+  .course-readmore {
+    min-height: 1px !important;
   }
 }

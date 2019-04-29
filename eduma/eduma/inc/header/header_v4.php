@@ -9,27 +9,28 @@
 					do_action( 'thim_sticky_logo' );
 					?>
 				</div>
+
 				<nav class="width-navigation table-cell table-right">
 					<?php get_template_part( 'inc/header/main-menu-v4' ); ?>
 				</nav>
-				<div class="menu-mobile-effect navbar-toggle" data-effect="mobile-effect">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</div>
 
-				<?php if ( ! wp_is_mobile() ): ?>
-					<div class="menu-right table-cell table-right">
-						<?php
-						//sidebar menu_right
-						if ( is_active_sidebar( 'menu_right' ) ) {
-							echo '<ul>';
-							dynamic_sidebar( 'menu_right' );
-							echo '</ul>';
-						}
-						?>
-					</div>
-				<?php endif; ?>
+                <div class="menu-right table-cell table-right">
+                    <?php
+                    //sidebar menu_right
+                    if ( is_active_sidebar( 'menu_right' ) ) {
+                        echo '<ul>';
+                        dynamic_sidebar( 'menu_right' );
+                        echo '</ul>';
+                    }
+                    ?>
+                </div>
+
+                <div class="menu-mobile-effect navbar-toggle" data-effect="mobile-effect">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </div>
+
 			</div>
 			<!--end .row-->
 		</div>

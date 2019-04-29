@@ -53,16 +53,6 @@ $theme_options_data = get_theme_mods();
 				<?php echo '<p class="message message-error">' . esc_html__( 'You have entered an incorrect reCAPTCHA value.', 'eduma' ) . '</p>'; ?>
 			<?php endif; ?>
 
-			<!-- edit -->
-			<div class="thim-login">
-				<?php if ( is_active_sidebar( 'register-widget-manual' ) ) : ?>
-					<ul id="sidebar" class="text-center col">
-						<?php dynamic_sidebar( 'register-widget-manual' ); ?>
-					</ul>
-				<?php endif; ?>
-			</div>
-			<!-- edit -->
-
 			<div class="thim-login form-submission-register">
 				<h2 class="title"><?php esc_html_e( 'Register', 'eduma' ); ?></h2>
 
@@ -76,57 +66,6 @@ $theme_options_data = get_theme_mods();
 					<p>
 						<input placeholder="<?php esc_attr_e( 'Email', 'eduma' ); ?>" type="email" name="user_email" class="input required" />
 					</p>
-
-					<!-- start edit -->
-					<?php
-
-					/**
-					 * Fires and displays any extra member registration details fields.
-					 *
-					 * @since 1.9.0
-					 */
-					do_action( 'bp_account_details_fields' ); ?>
-
-					<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
-
-					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
-
-						<div<?php bp_field_css_class( 'editfield' ); ?>>
-							<fieldset>
-
-							<?php
-							$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
-							if($field_type->category != "Single Fields"):
-								$field_type->edit_field_html();
-							endif;
-
-							/**
-							 * Fires before the display of the visibility options for xprofile fields.
-							 *
-							 * @since 1.7.0
-							 */
-							do_action( 'bp_custom_profile_edit_fields_pre_visibility' );
-
-							 ?>
-
-							<?php
-
-							/**
-							 * Fires after the display of the visibility options for xprofile fields.
-							 *
-							 * @since 1.1.0
-							 */
-							do_action( 'bp_custom_profile_edit_fields' ); ?>
-
-							</fieldset>
-						</div>
-
-					<?php endwhile; ?>
-
-					<input placeholder="" type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
-
-					<?php endwhile; endif; endif; ?>
-					<!-- end edit -->
 
 					<?php if ( get_theme_mod( 'thim_auto_login', true ) ) { ?>
 						<p>
@@ -157,9 +96,13 @@ $theme_options_data = get_theme_mods();
 					<?php endif; ?>
 
 					<?php if ( ! empty( $instance['term'] ) ): ?>
+						<?php
+						$target = isset($instance['is_external']) ? $instance['is_external'] : '_blank';
+						$rel = isset($instance['nofollow']) ? 'nofollow' : 'dofollow';
+						?>
 						<p>
 							<input type="checkbox" class="required" name="term" id="termFormField">
-							<label for="termFormField"><?php printf( __( 'I accept the <a href="%s" target="_blank">Terms of Service</a>', 'eduma' ), esc_url( $instance['term'] ) ); ?></label>
+							<label for="termFormField"><?php printf( __( 'I accept the <a href="%s" target="%s" rel="%s">Terms of Service</a>', 'eduma' ), esc_url( $instance['term'] ), $target, $rel ); ?></label>
 						</p>
 					<?php endif; ?>
 
@@ -179,7 +122,7 @@ $theme_options_data = get_theme_mods();
 						<input type="submit" name="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e( 'Sign up', 'eduma' ); ?>" />
 					</p>
 				</form>
-				<?php echo '<p class="link-bottom">' . esc_html__( 'Are you a member? ', 'eduma' ) . '<a href="' . esc_url( thim_get_login_page_url() ) . '">' . esc_html__( 'Login now', 'eduma' ) . '</a></p>'; ?>
+				<?php echo '<p class="link-bottom">' . esc_html__( 'Are you a member? ', 'eduma' ) . ' <a href="' . esc_url( thim_get_login_page_url() ) . '">' . esc_html__( 'Login now', 'eduma' ) . '</a></p>'; ?>
 			</div>
 
 			<?php return; ?>
@@ -242,7 +185,9 @@ $theme_options_data = get_theme_mods();
 					<input type="submit" name="submit" id="resetpass-button" class="button" value="<?php _e( 'Reset Password', 'eduma' ); ?>" />
 				</p>
 
-				<p class="message message-success"><?php echo wp_get_password_hint(); ?></p>
+				<p class="message message-success">
+					<?php esc_html_e( 'Hint: The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ &amp; ).', 'eduma' ); ?>
+				</p>
 
 			</form>
 		</div>
@@ -317,9 +262,10 @@ $theme_options_data = get_theme_mods();
 			<?php
 			$registration_enabled = get_option( 'users_can_register' );
 			if ( $registration_enabled ) {
-				echo '<p class="link-bottom">' . esc_html__( 'Not a member yet? ', 'eduma' ) . '<a href="' . esc_attr( $link_register ) . '">' . esc_html__( 'Register now', 'eduma' ) . '</a></p>';
+				echo '<p class="link-bottom">' . esc_html__( 'Not a member yet? ', 'eduma' ) . ' <a href="' . esc_attr( $link_register ) . '">' . esc_html__( 'Register now', 'eduma' ) . '</a></p>';
 			}
 			?>
 		</div>
 	</div>
 </div>
+

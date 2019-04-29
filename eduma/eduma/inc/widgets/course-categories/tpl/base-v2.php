@@ -1,5 +1,5 @@
 <?php
-
+echo '<pre>'; print_r( $instance ); echo '</pre>';
 $show_count   = isset( $instance['list-options']['show_counts'] ) ? $instance['list-options']['show_counts'] : 0 ;
 $hierarchical = isset( $instance['list-options']['hierarchical'] ) ? $instance['list-options']['hierarchical'] : true;
 $taxonomy     = 'course_category';

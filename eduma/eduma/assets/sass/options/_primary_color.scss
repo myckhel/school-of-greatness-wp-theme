@@ -1,4 +1,5 @@
 //Color - primary color
+.elementor-widget-thim-icon-box .wrapper-box-icon.has_custom_image:not(.overlay) .smicon-read:hover,
 aside .woof_container_size .woof_list li input[type=radio]:checked:before,
 #learn-press-course-curriculum ul.curriculum-sections .section-content .course-lesson a.course-item-title:hover,
 #learn-press-course-curriculum ul.curriculum-sections .section-content .course-assignment a.course-item-title:hover,
@@ -103,6 +104,7 @@ body .vc_tta.vc_tta-spacing-1 .vc_tta-tab .vc_active a .fa,
 .thim-simple-wrapper .event-wrapper:hover .title a,
 .thim-right-bg-secondary-color .thim-list-post-inner .link_read_more a:hover,
 .thim-widget-carousel-categories .link-view-all:hover,
+.elementor-widget-thim-carousel-categories .link-view-all:hover,
 .thim-sidebar-content .twitter-inner a:hover,
 .thim-grid-posts .article-wrapper:hover .title a,
 .thim-experience .title,
@@ -126,7 +128,7 @@ li.product-category h3:hover,
 .course-review .review-stars-rated .review-stars >li span,
 .switch-layout-container .switch-layout a.switch-active,
 .switch-layout-container .switch-layout a:hover,
-.thim-widget-courses .view-all-courses:hover,
+.thim-widget-courses-wrapper .view-all-courses:hover,
 .thim-course-carousel .owl-controls .owl-prev:hover .fa,
 .thim-course-carousel .owl-controls .owl-next:hover .fa,
 .thim-carousel-course-categories .owl-carousel .owl-item .title a:hover,
@@ -207,6 +209,9 @@ input[type=checkbox]:checked:before,
 .thim-widget-courses .grid-1 .view-all-courses,
 .thim-widget-courses .grid-1 .thim-course-grid .course-item .thim-course-content .author a,
 .thim-widget-courses .grid-1 .thim-course-grid .course-item .thim-course-content .course-meta .course-price .value,
+.elementor-widget-thim-courses .grid-1 .view-all-courses,
+.elementor-widget-thim-courses .grid-1 .thim-course-grid .course-item .thim-course-content .author a,
+.elementor-widget-thim-courses .grid-1 .thim-course-grid .course-item .thim-course-content .course-meta .course-price .value,
 .thim-carousel-course-categories-tabs .thim-course-slider .item .title a:hover,
 .thim-carousel-course-categories-tabs .thim-course-slider .item.active .title a,
 .thim-carousel-course-categories-tabs .thim-course-slider .item.active .icon,
@@ -276,6 +281,7 @@ input[type=radio]:checked:before,
 .loop-pagination li .page-numbers:hover,
 .loop-pagination li .page-numbers.current,
 .thim-widget-carousel-categories .content-wrapper,
+.elementor-widget-thim-carousel-categories .content-wrapper,
 body .vc_tta.vc_tta-spacing-1 .vc_tta-tab .vc_active:before,
 .lp_pmpro_courses_by_level .level-wrap header .lp_pmpro_title_level:before,
 .lp_pmpro_courses_by_level .level-wrap footer a,
@@ -294,6 +300,7 @@ body .vc_tta.vc_tta-spacing-1 .vc_tta-tab .vc_active:before,
 body .vc_tta.vc_general .vc_active .vc_tta-panel-title > a:before,
 body .vc_tta.vc_general .vc_tta-panel-title:hover > a:before,
 .thim-widget-courses .view-all-courses.position-bottom,
+.elementor-widget-thim-courses .view-all-courses.position-bottom,
 .woocommerce .add_to_cart_button.ajax_add_to_cart,
 .cssload-loader-inner-style-2,
 .widget_shopping_cart .minicart_hover .cart-items-number span.wrapper-items-number,
@@ -454,7 +461,8 @@ body.course-item-popup #learn-press-content-item #course-item-content-header,
 .thim-video-popup .button-popup:before,
 .thim-courses-collection .owl-controls .owl-buttons>div:hover:before,
 .grad-slider .custom.tparrows:hover,
-button, .form_developer_course .content .submit_row {
+button, .form_developer_course .content .submit_row,
+.elementor-widget-thim-icon-box .line-heading {
 	background-color: $thim_thim_body_primary_color;
 }
 
@@ -521,7 +529,7 @@ body .vc_tta.vc_general .vc_tta-panel-title:hover .vc_tta-controls-icon:after,
 .loop-pagination a:hover .page-number,
 .thim-course-carousel .owl-controls .owl-prev:hover,
 .thim-course-carousel .owl-controls .owl-next:hover,
-.thim-widget-courses .view-all-courses:hover,
+.thim-widget-courses-wrapper .view-all-courses:hover,
 .filter-controls li a:hover,
 .filter-controls li a.active,
 .product-cat li a:hover,
@@ -587,7 +595,8 @@ footer#colophon .footer .thim-footer-location .social a:hover,
 	border-top-color: $thim_thim_body_primary_color;
 }
 
-.thim-widget-carousel-categories .content-wrapper:before {
+.thim-widget-carousel-categories .content-wrapper:before,
+.elementor-widget-thim-carousel-categories .content-wrapper:before {
 	border-right-color: $thim_thim_body_primary_color;
 }
 
@@ -618,6 +627,7 @@ form.lp-checkout .logged-in,
 .thim-style-content-new-1.woocommerce .widget_price_filter .ui-slider .ui-slider-range,
 .thim-style-content-new-1.woocommerce .widget_price_filter .ui-slider .ui-slider-handle,
 .thim-widget-courses .grid-1 .view-all-courses:hover,
+.elementor-widget-thim-courses .grid-1 .view-all-courses:hover,
 .woocommerce-page .wc-proceed-to-checkout a.button {
 	background-color: $thim_thim_body_primary_color;
 }
@@ -656,4 +666,7 @@ form.lp-checkout .logged-in,
 }
 a.color_primary {
 	color: $thim_thim_body_primary_color!important;
+}
+.woosalescountdown .counter-group .counter-block .counter-caption {
+	color: $thim_thim_body_primary_color;
 }

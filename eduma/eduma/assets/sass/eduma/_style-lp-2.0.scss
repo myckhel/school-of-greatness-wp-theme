@@ -174,7 +174,6 @@
 	ul{
 		list-style: none;
 		margin: 0;
-		display: flex;
 		overflow: hidden;
 		li{
 			list-style: none;
@@ -904,12 +903,6 @@ body.content-item-only{
 		height: -webkit-calc(100vh - 70px);
 		height: -moz-calc(100vh - 70px);
 	}
-}
-
-@media screen and (max-width: 600px) {
-  #wpadminbar {
-	position: fixed;
-  }
 }
 
 @media( max-width: 1024px ) {

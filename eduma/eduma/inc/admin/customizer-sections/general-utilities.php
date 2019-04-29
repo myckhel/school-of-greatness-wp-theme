@@ -87,6 +87,7 @@ thim_customizer()->add_field(
 			''                => esc_html__( 'Select', 'eduma' ),
 			'site_origin'     => esc_html__( 'Site Origin', 'eduma' ),
 			'visual_composer' => esc_html__( 'Visual Composer', 'eduma' ),
+			'elementor'       => esc_html__( 'Elementor', 'eduma' ),
 		),
 	)
 );

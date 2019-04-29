@@ -13,7 +13,7 @@ vc_map( array(
 			'admin_label' => true,
 			'heading'     => esc_html__( 'Title', 'eduma' ),
 			'param_name'  => 'title',
-			'value'       => esc_html__( '', 'eduma' ),
+			'value'       => '',
 			'description' => esc_html__( 'Write the title for the heading.', 'eduma' )
 		),
         array(
@@ -21,7 +21,7 @@ vc_map( array(
             'admin_label' => true,
             'heading'     => esc_html__( 'Main Title', 'eduma' ),
             'param_name'  => 'main_title',
-            'value'       => esc_html__( '', 'eduma' ),
+            'value'       => '',
             'description' => esc_html__( 'Write the Main title for the heading.', 'eduma' )
         ),
         array(
@@ -38,7 +38,7 @@ vc_map( array(
 			'admin_label' => false,
 			'heading'     => esc_html__( 'Heading color ', 'eduma' ),
 			'param_name'  => 'textcolor',
-			'value'       => esc_html__( '', 'eduma' ),
+			'value'       => '',
 			'description' => esc_html__( 'Select the title color.', 'eduma' ),
 			'group'       => esc_html__( 'Heading Settings', 'eduma' ),
 		),
@@ -143,7 +143,7 @@ vc_map( array(
 			'type'        => 'textarea',
 			'heading'     => esc_html__( 'Sub heading', 'eduma' ),
 			'param_name'  => 'sub_heading',
-			'value'       => esc_html__( '', 'eduma' ),
+			'value'       => '',
 			'description' => esc_html__( 'Enter sub heading.', 'eduma' )
 		),
 		//Description color
@@ -152,7 +152,7 @@ vc_map( array(
 			'admin_label' => false,
 			'heading'     => esc_html__( 'Sub heading color ', 'eduma' ),
 			'param_name'  => 'sub_heading_color',
-			'value'       => esc_html__( '', 'eduma' ),
+			'value'       => '',
 			'description' => esc_html__( 'Select the sub heading color.', 'eduma' ),
 		),
 
@@ -161,7 +161,7 @@ vc_map( array(
             'admin_label' => false,
             'heading'     => esc_html__( 'Clone Title?', 'eduma' ),
             'param_name'  => 'clone_title',
-            //'value'       => array( esc_html__( '', 'eduma' ) => 'yes' ),
+            //'value'       => array( '' => 'yes' ),
             'std'         => false,
             'description' => esc_html__( 'Clone Title.', 'eduma' ),
         ),
@@ -180,7 +180,7 @@ vc_map( array(
 			'type'        => 'colorpicker',
 			'heading'     => esc_html__( 'Separator color', 'eduma' ),
 			'param_name'  => 'bg_line',
-			'value'       => esc_html__( '', 'eduma' ),
+			'value'       => '',
 			'description' => esc_html__( 'Choose the separator color.', 'eduma' ),
 		),
 

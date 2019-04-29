@@ -364,6 +364,7 @@
 }
 
 /** Carousel categories **/
+.elementor-widget-thim-carousel-categories,
 .thim-widget-carousel-categories {
 	position: relative;
 	.link-view-all {
@@ -521,6 +522,7 @@
 		margin-bottom: 0;
 		padding-bottom: 15px;
 	}
+	.elementor-widget-thim-icon-box,
 	.thim-widget-icon-box {
 		.smicon-read {
 			font-weight: 400 !important;
@@ -659,4 +661,13 @@
 			display: inline-block;
 		}
 	}
+}
+
+.thim-widget-carousel-categories .owl-theme .content-wrapper {
+	.title,
+	.desc,
+	.list-course-items {
+		min-height: 1px !important;
+	}
+
 }

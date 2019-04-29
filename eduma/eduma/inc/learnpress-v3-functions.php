@@ -891,8 +891,10 @@ if ( ! function_exists( 'thim_related_courses' ) ) {
 					     data-pagination="1">
 						<?php foreach ( $related_courses as $course_item ) : ?>
 							<?php
-							$course      = learn_press_get_course( $course_item->ID );
-							$is_required = $course->is_required_enroll();
+							$course                     = learn_press_get_course( $course_item->ID );
+							$is_required                = $course->is_required_enroll();
+                            $course_des                 = get_post_meta( $course_item->ID, '_lp_coming_soon_msg', true );
+                            $course_item_excerpt_length = get_theme_mod( 'thim_learnpress_excerpt_length', 25 );
 							?>
 							<article class="lpr_course">
 								<div class="course-item">
@@ -924,51 +926,65 @@ if ( ! function_exists( 'thim_related_courses' ) ) {
 											<a rel="bookmark"
 											   href="<?php echo get_the_permalink( $course_item->ID ); ?>"><?php echo esc_html( $course_item->post_title ); ?></a>
 										</h2> <!-- .entry-header -->
-										<div class="course-meta">
-											<?php
-											$count_student = $course->get_users_enrolled() ? $course->get_users_enrolled() : 0;
-											?>
-											<div class="course-students">
-												<label><?php esc_html_e( 'Students', 'eduma' ); ?></label>
-												<?php do_action( 'learn_press_begin_course_students' ); ?>
 
-												<div class="value"><i class="fa fa-group"></i>
-													<?php echo esc_html( $count_student ); ?>
-												</div>
-												<?php do_action( 'learn_press_end_course_students' ); ?>
+                                        <?php if ( thim_plugin_active( 'learnpress-coming-soon-courses/learnpress-coming-soon-courses.php' ) && learn_press_is_coming_soon( $course_item->ID ) ): ?>
+                                            <?php if ( intval( $course_item_excerpt_length ) && $course_des ): ?>
+                                                <div class="course-description">
+                                                    <?php echo wp_trim_words( $course_des, $course_item_excerpt_length ); ?>
+                                                </div>
+                                            <?php endif; ?>
 
-											</div>
-											<?php thim_course_ratings_count( $course_item->ID ); ?>
-											<?php if ( $price = $course->get_price_html() ) {
+                                            <div class="message message-warning learn-press-message coming-soon-message">
+                                                <?php esc_html_e( 'Coming soon', 'eduma' ) ?>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="course-meta">
+                                                <?php
+                                                $count_student = $course->get_users_enrolled() ? $course->get_users_enrolled() : 0;
+                                                ?>
+                                                <div class="course-students">
+                                                    <label><?php esc_html_e( 'Students', 'eduma' ); ?></label>
+                                                    <?php do_action( 'learn_press_begin_course_students' ); ?>
 
-												$origin_price = $course->get_origin_price_html();
-												$sale_price   = $course->get_sale_price();
-												$sale_price   = isset( $sale_price ) ? $sale_price : '';
-												$class        = '';
-												if ( $course->is_free() || ! $is_required ) {
-													$class .= ' free-course';
-													$price = esc_html__( 'Free', 'eduma' );
-												}
+                                                    <div class="value"><i class="fa fa-group"></i>
+                                                        <?php echo esc_html( $count_student ); ?>
+                                                    </div>
+                                                    <?php do_action( 'learn_press_end_course_students' ); ?>
 
-												?>
+                                                </div>
+                                                <?php thim_course_ratings_count( $course_item->ID ); ?>
+                                                <?php if ( $price = $course->get_price_html() ) {
 
-												<div class="course-price" itemprop="offers" itemscope
-												     itemtype="http://schema.org/Offer">
-													<div class="value<?php echo $class; ?>" itemprop="price">
-														<?php
-														if ( $sale_price ) {
-															echo '<span class="course-origin-price">' . $origin_price . '</span>';
-														}
-														?>
-														<?php echo $price; ?>
-													</div>
-													<meta itemprop="priceCurrency"
-													      content="<?php echo learn_press_get_currency(); ?>" />
-												</div>
-												<?php
-											}
-											?>
-										</div>
+                                                    $origin_price = $course->get_origin_price_html();
+                                                    $sale_price   = $course->get_sale_price();
+                                                    $sale_price   = isset( $sale_price ) ? $sale_price : '';
+                                                    $class        = '';
+                                                    if ( $course->is_free() || ! $is_required ) {
+                                                        $class .= ' free-course';
+                                                        $price = esc_html__( 'Free', 'eduma' );
+                                                    }
+
+                                                    ?>
+
+                                                    <div class="course-price" itemprop="offers" itemscope
+                                                         itemtype="http://schema.org/Offer">
+                                                        <div class="value<?php echo $class; ?>" itemprop="price">
+                                                            <?php
+                                                            if ( $sale_price ) {
+                                                                echo '<span class="course-origin-price">' . $origin_price . '</span>';
+                                                            }
+                                                            ?>
+                                                            <?php echo $price; ?>
+                                                        </div>
+                                                        <meta itemprop="priceCurrency"
+                                                              content="<?php echo learn_press_get_currency(); ?>" />
+                                                    </div>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </div>
+
+                                        <?php endif; ?>
 									</div>
 								</div>
 							</article>
@@ -1328,15 +1344,21 @@ if ( ! function_exists( 'thim_get_all_courses_instructors' ) ) {
 		$result = array();
 		if ( $teacher ) {
 			foreach ( $teacher as $id ) {
-				$courses        = learn_press_get_course_of_user_instructor( array( 'user_id' => $id ) );
-				$count_students = $count_rate = 0;
-				foreach ( $courses["rows"] as $key => $course ) {
-					//$user_count = $course->get_users_enrolled() ? $course->get_users_enrolled() : 0;
-					$curd            = new LP_Course_CURD();
-					$number_students = $curd->get_user_enrolled( $course->ID );
-					$count_students  = count( $number_students ) ? $count_students + count( $number_students ) : $count_students;
+				$user_curd        = new LP_User_CURD();
+				$query_list_table = $user_curd->query_own_courses( $id, array(
+					'limit'  => 9999,
+					'status' => 'publish'
+				) );
+				$own_courses      = $query_list_table->get_items();
+				$count_students   = $count_rate = 0;
+
+				foreach ( $own_courses as $course_id ) {
+					$course_curd     = new LP_Course_CURD();
+					$number_students = $course_curd->get_user_enrolled( $course_id );
+
+					$count_students += count( $number_students );
 					if ( thim_plugin_active( 'learnpress-course-review/learnpress-course-review.php' ) ) {
-						$rate = learn_press_get_course_rate_total( $course->ID );
+						$rate = learn_press_get_course_rate_total( $course_id );
 					} else {
 						$rate = 0;
 					}
@@ -1749,13 +1771,11 @@ if ( ! function_exists( 'thim_action_callback_learn_press_after_single_course' )
                         var redirect_url = http + http_host + request_uri;
                         if (redirect_url.indexOf('?') != -1) {
                             redirect_url = redirect_url + '&option=getmosociallogin&app_name=';
-                        }
-                        else {
+                        } else {
                             redirect_url = redirect_url + '?option=getmosociallogin&app_name=';
                         }
                     }
-                }
-                else {
+                } else {
                     var current_url = window.location.href;
                     var cname = 'redirect_current_url';
                     var d = new Date();

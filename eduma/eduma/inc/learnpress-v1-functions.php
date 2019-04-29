@@ -1239,18 +1239,6 @@ if ( !function_exists( 'thim_learnpress_breadcrumb' ) ) {
 	}
 }
 
-//function
-
-//function thim_require_login_to_take_course( $link, $page_id ) {
-//	if ( !is_user_logged_in() ) {
-//		$link = thim_get_login_page_url();
-//	}
-//	return $link;
-//}
-
-//add_filter( 'learn_press_get_page_profile_link', 'thim_require_login_to_take_course', 4, 2 );
-
-
 // Tab certificates profile page
 if ( thim_plugin_active( 'learnpress-certificates/learnpress-certificates.php' && class_exists( 'LP_Addon_Certificates' ) ) ) {
 	if ( !function_exists( 'thim_update_certificates_tab' ) ) {

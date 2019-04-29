@@ -311,12 +311,15 @@ form#lostpasswordform {
 }
 
 #thim-popup-login {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	position: fixed;
 	top: 0;
 	right: 0;
 	left: 0;
 	bottom: 0;
-	z-index: 9999999;
+	z-index: 9999;
 	@include opacity(0);
 	visibility: hidden;
 	background: rgba(0, 0, 0, 0.8);
@@ -331,17 +334,34 @@ form#lostpasswordform {
 		@include opacity(1);
 		visibility: visible;
 	}
-	.thim-login-container {
+	.popup-login-wrapper{
 		background: #fff;
 		position: relative;
-		padding: 80px 50px 80px;
+		padding: 40px 50px;
 		overflow: hidden;
-		max-width: 900px;
-		margin: auto;
-		top: 50%;
-		transform: translateY(-50%);
+		width: 900px;
+		max-width: calc(100% - 60px);
 		cursor: default;
+	}
+
+	.thim-login-container {
+		overflow: hidden;
+		display: flex;
+		width: 50%;
+		margin: auto;
+
+		&:not(.has-shortcode) {
+			.thim-login, .thim-register {
+				min-width: 100%;
+				padding: 0 30px;
+				position: relative;
+				float: left;
+				clear: none;
+			}
+		}
+
 		&.loading {
+
 			&:before {
 				background: rgba(255, 255, 255, 0.6);
 				top: 0;
@@ -356,10 +376,12 @@ form#lostpasswordform {
 				z-index: 3;
 			}
 		}
+
 		p, a {
 			font-size: 15px;
 			font-weight: 400;
 		}
+
 		.close-popup {
 			width: 40px;
 			height: 40px;
@@ -375,17 +397,14 @@ form#lostpasswordform {
 		}
 
 		&.has-shortcode {
+			width: 100%;
+
 			.message {
 				max-width: 340px;
 			}
 		}
 	}
 	.message {
-		display: block;
-		position: absolute;
-		left: 30px;
-		right: 30px;
-		text-align: left;
 		font-size: 13px !important;
 		width: 100% !important;
 		max-width: 370px;
@@ -399,6 +418,10 @@ form#lostpasswordform {
 		width: 50%;
 		float: left;
 		padding: 0 30px;
+		position: relative;
+		z-index: 2;
+		background-color: #fff;
+
 		> p {
 			font-size: 24px;
 			font-weight: 700;
@@ -436,7 +459,7 @@ form#lostpasswordform {
 
 	.has-shortcode {
 		.thim-login, .thim-register {
-			width: 50%;
+			min-width: 100%;
 			padding: 0 30px;
 			position: relative;
 			float: left;
@@ -545,25 +568,27 @@ body.thim-popup-active {
 }
 
 #thim-popup-login {
-	.thim-login, .thim-register {
-		display: none;
+	.thim-popup-inner {
+		display: flex;
+		width: 100%;
+		transition: all .3s;
 	}
 
 	&.active {
-		&.sign-in {
-			.thim-login {
-				display: block;
-			}
-		}
-
 		&.sign-up {
-			.thim-register {
-				display: block;
+			.thim-popup-inner {
+				transform: translateX(-100%);
 			}
 		}
 	}
 
 	.thim-login-container {
+		.mo-openid-app-icons {
+			& ~ .thim-popup-inner {
+				width: 50%;
+			}
+		}
+
 		.cssload-container {
 			display: none;
 		}
@@ -583,4 +608,8 @@ body.thim-popup-active {
 	a:hover {
 		text-decoration: underline;
 	}
+}
+
+.anr_captcha_field {
+	margin-bottom: 20px;
 }

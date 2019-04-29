@@ -209,18 +209,20 @@ if ( ! empty( $cat_id_tab ) ) {
             var items = root.find('.thim_content_item').length;
             root.find('.thim_content_item').css('width', contentItem.width() + '');
             root.find('.thim_content_tabs').css('width', parseInt(contentItem.width() * items) + 'px');
-            $(document).on('click', '.thim_tabs_slider ul li a', function(e) {
-                $(this).parent().parent().find('.active').removeClass('active');
+            $(document).on('click', '.thim_tabs_slider ul li a', function(e) {$(this).parent().parent().find('.active').removeClass('active');
                 $(this).parent().addClass('active');
                 e.preventDefault();
-                $(this).
-                    parent().
-                    parent().
-                    parent().
-                    parent().
-                    find('.thim_content_tabs').
-                    stop().
-                    animate({left: $($(this).attr('href')).position().left * (-1)}, {duration: 600});
+
+                let index = $(this).parent().index(),
+                    trans = contentItem.width() * index;
+
+                if (!$('body').hasClass('rtl')) {
+                    trans = -1 * trans;
+                }
+
+                var $contentTab = $(this).parent().parent().parent().parent().find('.thim_content_tabs');
+
+                $contentTab.css('transform', 'translateX(' + trans + 'px)');
             });
         });
     })(jQuery);

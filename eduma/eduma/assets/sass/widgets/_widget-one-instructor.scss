@@ -2,13 +2,19 @@
 	margin: 0 -15px;
 	padding-bottom: 90px;
 	width: auto;
-	.owl-item{
+
+	.owl-item {
 		padding: 0 15px;
 	}
+
+
 	.instructor-item{
 		background: #fff;
 		padding: 30px;
 		overflow: hidden;
+		> * {
+			min-height: 1px !important;
+		}
 		.avatar{
 			width: 62px;
 			float: left;
@@ -77,3 +83,5 @@
 		}
 	}
 }
+
+

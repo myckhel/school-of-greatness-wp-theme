@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by: Khoapq
- * Date: 15/10/2015
- */
 $html       = '';
 $group_id   = 'accordion_' . uniqid();
 $title      = $instance['title'] ? $instance['title'] : '';
@@ -37,5 +33,4 @@ $panel_list = $instance['panel'] ? $instance['panel'] : '';
 		<?php endforeach; ?>
 		<!-- End: List Panel -->
 	</div>
-
 </div>

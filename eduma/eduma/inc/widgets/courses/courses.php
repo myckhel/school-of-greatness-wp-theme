@@ -19,7 +19,6 @@ if (!class_exists('Thim_Courses_Widget')) {
 					'description'   => esc_html__( 'Display courses', 'eduma' ),
 					'help'          => '',
 					'panels_groups' => array( 'thim_widget_group' ),
-					'panels_icon'   => 'dashicons dashicons-welcome-learn-more',
 					'panels_icon'   => 'thim-widget-icon thim-widget-icon-courses'
 				),
 				array(),

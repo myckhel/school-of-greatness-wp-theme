@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Blank Page
- *
+ * Template Post Type: page, ae_global_templates
  **/
 ?><!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" <?php language_attributes(); ?>>

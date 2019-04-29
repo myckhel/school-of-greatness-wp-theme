@@ -14,13 +14,13 @@
 		) );
 	}
 	//sidebar menu_right
-	if ( wp_is_mobile() ) {
-		if ( is_active_sidebar( 'menu_right' ) ) {
-			echo '<li class="menu-right ' . get_theme_mod( 'thim_header_style', 'header_v4' ) . '"><ul>';
-			dynamic_sidebar( 'menu_right' );
-			echo '</ul></li>';
-		}
-	}
-	?>
 
+	if ( is_active_sidebar( 'menu_right' ) ) {
+		echo '<li class="menu-right ' . get_theme_mod( 'thim_header_style', 'header_v4' ) . '"><ul>';
+		dynamic_sidebar( 'menu_right' );
+		echo '</ul></li>';
+	}
+
+	?>
 </ul>
+<?php

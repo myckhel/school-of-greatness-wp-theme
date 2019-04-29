@@ -195,7 +195,9 @@ body.thim-demo-university-4{
 				line-height: 1.5;
 			}
 		}
-		.thim-widget-icon-box{
+		.thim-widget-icon-box,
+		.elementor-widget-thim-icon-box {
+
 			.heading__primary{
 				font-weight: 500;
 				margin-bottom: 6px;
@@ -269,6 +271,7 @@ body.thim-demo-university-4{
 .thim-desc-eduma-campus{
 	color: #fff;
 	padding-bottom: 59px;
+	position: relative;
 	.widget-title{
 		color: #fff;
 	}
@@ -355,6 +358,9 @@ body.thim-demo-university-4{
 .thim-right-bg-secondary-color{
 	overflow: hidden;
 	position: relative;
+	&.elementor-element {
+		overflow: visible;
+	}
 	.thim-list-post-inner .link_read_more a{
 		color: #fff;
 	}

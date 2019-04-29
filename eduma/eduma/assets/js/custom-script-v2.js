@@ -368,120 +368,10 @@ var can_escape = true;
                 });
     };
 
-    var thim_carousel = function() {
-        if (jQuery().owlCarousel) {
-            $('.thim-gallery-images').owlCarousel({
-                autoPlay   : false,
-                singleItem : true,
-                stopOnHover: true,
-                pagination : true,
-                autoHeight : false,
-            });
-
-            $('.thim-carousel-wrapper').each(function() {
-                var item_visible = $(this).data('visible') ? parseInt(
-                    $(this).data('visible')) : 4,
-                    item_desktopsmall = $(this).data('desktopsmall') ? parseInt(
-                        $(this).data('desktopsmall')) : item_visible,
-                    itemsTablet = $(this).data('itemtablet') ? parseInt(
-                        $(this).data('itemtablet')) : 2,
-                    itemsMobile = $(this).data('itemmobile') ? parseInt(
-                        $(this).data('itemmobile')) : 1,
-                    pagination = $(this).data('pagination') ? true : false,
-                    navigation = $(this).data('navigation') ? true : false,
-                    autoplay = $(this).data('autoplay') ? parseInt(
-                        $(this).data('autoplay')) : false,
-                    navigation_text = ($(this).data('navigation-text') &&
-                        $(this).data('navigation-text') == '2') ? [
-                        '<i class=\'fa fa-long-arrow-left \'></i>',
-                        '<i class=\'fa fa-long-arrow-right \'></i>',
-                    ] : [
-                        '<i class=\'fa fa-chevron-left \'></i>',
-                        '<i class=\'fa fa-chevron-right \'></i>',
-                    ];
-                $(this).owlCarousel({
-                    items            : item_visible,
-                    itemsDesktop     : [1200, item_visible],
-                    itemsDesktopSmall: [1024, item_desktopsmall],
-                    itemsTablet      : [768, itemsTablet],
-                    itemsMobile      : [480, itemsMobile],
-                    navigation       : navigation,
-                    pagination       : pagination,
-                    lazyLoad         : true,
-                    autoPlay         : autoplay,
-                    navigationText   : navigation_text,
-                });
-            });
-
-            $('.thim-carousel-course-categories .thim-course-slider, .thim-carousel-course-categories-tabs .thim-course-slider').
-                each(function() {
-                    var item_visible = $(this).data('visible') ? parseInt($(this).data('visible')) : 7,
-                        item_desktop = $(this).data('desktop') ? parseInt($(this).data('desktop')) : 7,
-                        item_desktopsmall = $(this).data('desktopsmall') ? parseInt($(this).data('desktopsmall')) : 6,
-                        item_tablet = $(this).data('tablet') ? parseInt($(this).data('tablet')) : 4,
-                        item_mobile = $(this).data('mobile') ? parseInt($(this).data('mobile')) : 2,
-                        pagination = $(this).data('pagination') ? true : false,
-                        navigation = $(this).data('navigation') ? true : false,
-                        autoplay = $(this).data('autoplay') ? parseInt($(this).data('autoplay')) : false,
-                        is_rtl = $('body').hasClass('rtl');
-
-                    $(this).owlCarousel({
-                        items            : item_visible,
-                        itemsDesktop     : [1800, item_desktop],
-                        itemsDesktopSmall: [1024, item_desktopsmall],
-                        itemsTablet      : [768, item_tablet],
-                        itemsMobile      : [480, item_mobile],
-                        navigation       : navigation,
-                        pagination       : pagination,
-                        autoPlay         : autoplay,
-                        navigationText   : [
-                            '<i class=\'fa fa-chevron-left \'></i>',
-                            '<i class=\'fa fa-chevron-right \'></i>',
-                        ],
-                    });
-                });
-        }
-
-    };
-
-    var thim_contentslider = function() {
-        $('.thim-testimonial-slider').each(function() {
-            var elem = $(this),
-                item_visible = parseInt(elem.data('visible')),
-                item_time = parseInt(elem.data('time')),
-                autoplay = elem.data('auto') ? true : false,
-                item_ratio = elem.data('ratio') ? elem.data('ratio') : 1.18,
-                item_padding = elem.data('padding') ? elem.data('padding') : 15,
-                item_activepadding = elem.data('activepadding') ? elem.data(
-                    'activepadding') : 0,
-                item_width = elem.data('width') ? elem.data('width') : 100,
-                mousewheel = elem.data('mousewheel') ? true : false;
-
-            var testimonial_slider = $(this).thimContentSlider({
-                items            : elem,
-                itemsVisible     : item_visible,
-                mouseWheel       : mousewheel,
-                autoPlay         : autoplay,
-                pauseTime        : item_time,
-                itemMaxWidth     : item_width,
-                itemMinWidth     : item_width,
-                activeItemRatio  : item_ratio,
-                activeItemPadding: item_activepadding,
-                itemPadding      : item_padding,
-            });
-
-        });
-    };
-
     var thim_course_menu_landing = function() {
         if ($('.thim-course-menu-landing').length > 0) {
             var menu_landing = $('.thim-course-menu-landing'),
                 tab_course = $('#course-landing .nav-tabs');
-
-            // Only use for old single course layout
-            if (tab_course.length) {
-                return;
-            }
 
             var tab_active = tab_course.find('>li.active'),
                 tab_item = tab_course.find('>li>a'),
@@ -493,8 +383,7 @@ var can_escape = true;
             $('footer#colophon').addClass('has-thim-course-menu');
             if (tab_active.length > 0) {
                 var active_href = tab_active.find('>a').attr('href'),
-                    landing_active = tab_landing.find('>li>a[href="' +
-                        active_href + '"]');
+                    landing_active = tab_landing.find('>li>a[href="' + active_href + '"]');
 
                 if (landing_active.length > 0) {
                     landing_active.parent().addClass('active');
@@ -503,17 +392,25 @@ var can_escape = true;
 
             tab_landing_item.on('click', function(event) {
                 event.preventDefault();
+
                 var href = $(this).attr('href'),
                     parent = $(this).parent();
 
-                $('body, html').animate({
-                    scrollTop: tab_course.offset().top - 50,
-                }, 800);
                 if (!parent.hasClass('active')) {
                     tab_landing.find('li.active').removeClass('active');
                     parent.addClass('active');
-                    tab_course.find('>li>a[href="' + href + '"]').
-                        trigger('click');
+                }
+
+                if (tab_course.length > 0) {
+                    tab_course.find('>li>a[href="' + href + '"]').trigger('click');
+
+                    $('body, html').animate({
+                        scrollTop: tab_course.offset().top - 50,
+                    }, 800);
+                } else {
+                    $('body, html').animate({
+                        scrollTop: $($.attr(this, 'href')).offset().top,
+                    }, 500);
                 }
             });
 
@@ -532,8 +429,7 @@ var can_escape = true;
                 if ($(window).scrollTop() > checkTop) {
                     $('body').addClass('course-landing-active');
                 } else {
-                    $('body.course-landing-active').
-                        removeClass('course-landing-active');
+                    $('body.course-landing-active').removeClass('course-landing-active');
                 }
             });
         }
@@ -566,13 +462,13 @@ var can_escape = true;
     });
 
     function empty(data) {
-        if (typeof(data) == 'number' || typeof(data) == 'boolean') {
+        if (typeof (data) == 'number' || typeof (data) == 'boolean') {
             return false;
         }
-        if (typeof(data) == 'undefined' || data === null) {
+        if (typeof (data) == 'undefined' || data === null) {
             return true;
         }
-        if (typeof(data.length) != 'undefined') {
+        if (typeof (data.length) != 'undefined') {
             return data.length === 0;
         }
         var count = 0;
@@ -671,7 +567,6 @@ var can_escape = true;
             }
         }, false);
     }
-    ;
 
     /* mobile menu */
     if (jQuery(window).width() > 768) {
@@ -695,8 +590,7 @@ var can_escape = true;
             if (jQuery(this).next('.sub-menu').is(':hidden')) {
                 jQuery(this).next('.sub-menu').slideDown(500, 'linear');
                 jQuery(this).html('<i class="fa fa-angle-up"></i>');
-            }
-            else {
+            } else {
                 jQuery(this).next('.sub-menu').slideUp(500, 'linear');
                 jQuery(this).html('<i class="fa fa-angle-down"></i>');
             }
@@ -708,8 +602,6 @@ var can_escape = true;
         thim_post_gallery();
         thim_quick_view();
         thim_miniCartHover();
-        thim_carousel();
-        thim_contentslider();
         thim_SwitchLayout();
         thim_Shop_SwitchLayout();
         thim_Blog_SwitchLayout();
@@ -1126,7 +1018,7 @@ var can_escape = true;
 
         $(document).on('focus', '#popup-header .thim-s', function() {
             var link = $('#popup-header .courses-list-search a');
-            console.log($(this).val(), link.length);
+
             if ($(this).val() != '' && link.length > 0) {
                 $('#popup-header .courses-list-search').
                     addClass('search-visible');
@@ -1317,8 +1209,7 @@ var can_escape = true;
             if (typeof options.slide === 'undefined' || options.slide ===
                 true) {
                 $(carousels[i]).owlCarousel(options);
-            }
-            else {
+            } else {
                 $(carousels[i]).removeClass('owl-carousel');
             }
         }
@@ -1645,8 +1536,8 @@ var can_escape = true;
                 $('.content_course_2 .header_single_content .bg_header'));
             $('.thim-carousel-instructors .instructor-item').
                 css('min-height', '');
-            $('.thim-owl-carousel-post:not(.layout-3) .image').
-                css('min-height', '');
+            // $('.thim-owl-carousel-post:not(.layout-3) .image').
+            //     css('min-height', '');
             $('.thim-course-carousel .course-thumbnail').css('min-height', '');
             $('body.thim-demo-university-4 .thim-about-eduma, body.thim-demo-university-4 .thim-video-popup .video-info').
                 css('min-height', '');
@@ -1656,16 +1547,11 @@ var can_escape = true;
             }
             thim_get_position_header_course_v2(
                 $('.content_course_2 .header_single_content .bg_header'));
-            thim_min_height_carousel(
-                $('.thim-carousel-instructors .instructor-item'));
-            thim_min_height_carousel(
-                $('.thim-owl-carousel-post:not(.layout-3) .image'));
-            thim_min_height_carousel(
-                $('.thim-course-carousel .course-thumbnail'));
-            thim_min_height_carousel(
-                $('.thim-row-bg-border-top .thim-bg-border-top'));
-            thim_min_height_carousel(
-                $('.thim-testimonial-carousel-kindergarten .item'));
+            thim_min_height_carousel($('.thim-carousel-instructors .instructor-item'));
+            thim_min_height_carousel($('.thim-owl-carousel-post:not(.layout-3) .image'));
+            thim_min_height_carousel($('.thim-course-carousel .course-thumbnail'));
+            thim_min_height_carousel($('.thim-row-bg-border-top .thim-bg-border-top'));
+            thim_min_height_carousel($('.thim-testimonial-carousel-kindergarten .item'));
 
             thim_min_height_carousel(
                 $('.thim-widget-carousel-categories .item .image, .thim-widget-carousel-categories .item .content-wrapper'));
@@ -1707,15 +1593,28 @@ var can_escape = true;
 
     }
 
-    function thim_min_height_carousel($selector) {
-        var min_height = 0;
-        $selector.each(function(index, val) {
-            if ($(this).outerHeight() > min_height) {
-                min_height = $(this).outerHeight();
-            }
-            if (index + 1 == $selector.length) {
-                $selector.css('min-height', min_height);
-            }
+    $(window).load(function () {
+        thim_min_height_carousel('.thim-carousel-instructors', '.instructor-item');
+        thim_min_height_carousel('.thim-owl-carousel-post', '.image');
+        thim_min_height_carousel('.thim-course-carousel', '.course-thumbnail');
+
+        thim_min_height_content_area();
+    });
+
+    function thim_min_height_carousel(el, child) {
+        var $elements = $(el);
+
+        $elements.each(function () {
+            var $element = $(this),
+                $child = child ? $element.find(child) : $element.children(),
+                maxHeight = 0;
+
+            $child.each(function () {
+                var thisHeight = $(this).outerHeight();
+                if(thisHeight > maxHeight){
+                    maxHeight = thisHeight;
+                }
+            }).css('min-height', maxHeight);
         });
     }
 
@@ -1727,76 +1626,6 @@ var can_escape = true;
             content_area.css('min-height', winH - footer.height());
         }
     }
-
-    //Widget counter box
-    (function(a) {
-        a.fn.countTo = function(g) {
-            g = g || {};
-            return a(this).each(function() {
-                function e(a) {
-                    a = b.formatter.call(h, a, b);
-                    f.html(a);
-                }
-
-                var b = a.extend({}, a.fn.countTo.defaults, {
-                        from           : a(this).data('from'),
-                        to             : a(this).data('to'),
-                        speed          : a(this).data('speed'),
-                        refreshInterval: a(this).data('refresh-interval'),
-                        decimals       : a(this).data('decimals'),
-                    }, g), j = Math.ceil(b.speed / b.refreshInterval),
-                    l = (b.to - b.from) / j, h = this, f = a(this), k = 0,
-                    c = b.from, d = f.data('countTo') || {};
-                f.data('countTo', d);
-                d.interval && clearInterval(d.interval);
-                d.interval =
-                    setInterval(function() {
-                        c += l;
-                        k++;
-                        e(c);
-                        'function' == typeof b.onUpdate &&
-                        b.onUpdate.call(h, c);
-                        k >= j && (f.removeData('countTo'), clearInterval(
-                            d.interval), c = b.to, 'function' == typeof b.onComplete && b.onComplete.call(h, c));
-                    }, b.refreshInterval);
-                e(c);
-            });
-        };
-        a.fn.countTo.defaults = {
-            from           : 0,
-            to             : 0,
-            speed          : 1E3,
-            refreshInterval: 100,
-            decimals       : 0,
-            formatter      : function(a, e) {
-                return a.toFixed(e.decimals);
-            },
-            onUpdate       : null,
-            onComplete     : null,
-        };
-    })(jQuery);
-
-    jQuery(window).load(function() {
-
-        if (jQuery().waypoint) {
-            jQuery('.counter-box').waypoint(function() {
-                jQuery(this).find('.display-percentage').each(function() {
-                    var percentage = jQuery(this).data('percentage');
-                    jQuery(this).
-                        countTo({
-                            from           : 0,
-                            to             : percentage,
-                            refreshInterval: 40,
-                            speed          : 2000,
-                        });
-                });
-            }, {
-                triggerOnce: true,
-                offset     : '80%',
-            });
-        }
-
-    });
 
     $(document).ready(function() {
         $('.thim-search-light-style').
@@ -1896,6 +1725,7 @@ var can_escape = true;
     };
 
     //Code for timetable widget
+    // TODO when using many Thim Course Categories widgets
     $(document).ready(function() {
 
         var tab_cat_course = $('.thim-carousel-course-categories-tabs');
@@ -2056,14 +1886,21 @@ var can_escape = true;
 
         //Course archive search filter
         var search_time_out = null;
-        $(document).on('keyup', 'body:not(.course-filter-active) .course-search-filter',
+        $(document).on('keydown', 'body:not(.course-filter-active) .course-search-filter',
             function(event) {
                 if (event.ctrlKey) {
                     return;
                 }
-                if ((event.keyCode >= 48 && event.keyCode <= 90) || event.keyCode == 8 || event.keyCode == 32) {
+
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    return false;
+                }
+
+                if ((event.keyCode >= 48 && event.keyCode <= 90) || event.keyCode === 8 || event.keyCode === 32) {
                     var elem = $(this),
-                        keyword = elem.val();
+                        keyword = event.keyCode === 8 ? elem.val() : elem.val() + event.key,
+                        $body = $('body');
 
                     if (search_time_out != null) clearTimeout(search_time_out);
 
@@ -2073,26 +1910,47 @@ var can_escape = true;
 
                         $('#thim-course-archive').addClass('loading');
 
-                        var archive = elem.parents('#lp-archive-courses');
+                        var archive = elem.parents('#lp-archive-courses'),
+                            cateArr = [];
+
+                        if ($body.hasClass('category')) {
+                            var bodyClass = $body.attr('class'),
+                                cateClass = bodyClass.match(/category\-\d+/gi)[0],
+                                cateID = cateClass.split('-').pop();
+
+                            cateArr.push(cateID);
+                        }
+
+                        if ($('.list-cate-filter').length > 0) {
+                            $('.list-cate-filter input.filtered').each(function() {
+
+                                if ($(this).val() !== cateID) {
+                                    cateArr.push($(this).val());
+                                }
+                            });
+                        }
+
                         $.ajax({
+                            url     : $('#lp-archive-courses').data('allCoursesUrl'),
                             type    : 'POST',
                             dataType: 'html',
                             data    : {
-                                s             : keyword,
-                                ref           : 'course',
-                                post_type     : 'lp_course',
-                                course_orderby: $('.thim-course-order > select').val(),
-                                course_paged  : 1,
+                                s                 : keyword,
+                                ref               : 'course',
+                                post_type         : 'lp_course',
+                                course_orderby    : $('.thim-course-order > select').val(),
+                                course_cate_filter: cateArr,
+                                course_paged      : 1,
                             },
                             success : function(html) {
                                 var archive_html = $(html).find('#lp-archive-courses').html();
                                 archive.html(archive_html);
                                 $('.course-search-filter').val(keyword).trigger('focus');
-                                $('body').removeClass('course-filter-active');
+                                $body.removeClass('course-filter-active');
                                 $('.filter-loading').remove();
                             },
                             error   : function() {
-                                $('body').removeClass('course-filter-active');
+                                $body.removeClass('course-filter-active');
                                 $('.filter-loading').remove();
                             },
                         });

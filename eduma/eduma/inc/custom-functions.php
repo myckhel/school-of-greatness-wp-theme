@@ -1161,12 +1161,12 @@ if ( ! function_exists( 'thim_replace_retrieve_password_message' ) ) {
 		);
 
 		// Create new message
-		$message = __( 'Someone has requested a password reset for the following account:', 'eduma' ) . '<br>';
-		$message .= sprintf( __( 'Site Name: %s' ), network_home_url( '/' ) ) . '<br>';
-		$message .= sprintf( __( 'Username: %s', 'eduma' ), $user_login ) . '<br>';
-		$message .= __( 'If this was a mistake, just ignore this email and nothing will happen.', 'eduma' ) . '<br>';
-		$message .= __( 'To reset your password, visit the following address:', 'eduma' ) . '<br>';
-		$message .= $reset_link . '<br>';
+		$message = __( 'Someone has requested a password reset for the following account:', 'eduma' ) . "\n";
+		$message .= sprintf( __( 'Site Name: %s' ), network_home_url( '/' ) ) . "\n";
+		$message .= sprintf( __( 'Username: %s', 'eduma' ), $user_login ) . "\n";
+		$message .= __( 'If this was a mistake, just ignore this email and nothing will happen.', 'eduma' ) . "\n";
+		$message .= __( 'To reset your password, visit the following address:', 'eduma' ) . "\n";
+		$message .= $reset_link . "\n";
 
 		return $message;
 	}
@@ -1673,13 +1673,6 @@ if ( class_exists( 'TP_Event_Authentication' ) ) {
  */
 add_filter( 'tp_event_login_url', 'thim_get_login_page_url' );
 add_filter( 'event_auth_login_url', 'thim_get_login_page_url' );
-
-/**
- * Add action if without using wpengine
- */
-if ( ! function_exists( 'is_wpe' ) && ! function_exists( 'is_wpe_snapshot' ) ) {
-	add_action( 'init', 'thim_redirect_rp_url' );
-}
 
 /*
  * Remove login page link in the email new user notification
@@ -2952,10 +2945,7 @@ if ( ! function_exists( 'thim_header_class' ) ) {
  */
 if ( ! function_exists( 'thim_footer_bottom' ) ) {
 	function thim_footer_bottom() {
-		$theme_options_data = get_theme_mods();
-		$style_content      = isset( $theme_options_data['thim_layout_content_page'] ) ? $theme_options_data['thim_layout_content_page'] : 'normal';
-		$style_header       = isset( $theme_options_data['thim_header_style'] ) ? $theme_options_data['thim_header_style'] : 'header_v1';
-		if ( ( is_active_sidebar( 'footer_bottom' ) && $style_content != 'new-1' ) || ( is_active_sidebar( 'footer_bottom' ) && $style_header != 'header_v4' ) ) {
+		if ( ( is_active_sidebar( 'footer_bottom' ) ) ) {
 			?>
 			<div class="footer-bottom">
 
@@ -2968,11 +2958,9 @@ if ( ! function_exists( 'thim_footer_bottom' ) ) {
 	}
 }
 add_action( 'thim_end_content_pusher', 'thim_footer_bottom' );
+
 if ( ! function_exists( 'thim_above_footer_area_fnc' ) ) {
 	function thim_above_footer_area_fnc() {
-		$theme_options_data = get_theme_mods();
-		$style_content      = isset( $theme_options_data['thim_layout_content_page'] ) ? $theme_options_data['thim_layout_content_page'] : 'normal';
-		$style_header       = isset( $theme_options_data['thim_header_style'] ) ? $theme_options_data['thim_header_style'] : 'header_v1';
 		if ( is_active_sidebar( 'footer_top' ) ) {
 			?>
 			<div class="footer-bottom-above">
@@ -2982,17 +2970,7 @@ if ( ! function_exists( 'thim_above_footer_area_fnc' ) ) {
 				</div>
 
 			</div>
-		<?php } else {
-			if ( is_active_sidebar( 'footer_bottom' ) && $style_content == 'new-1' && $style_header == 'header_v4' ) {
-				?>
-				<div class="footer-bottom-above">
-
-					<div class="container">
-						<?php dynamic_sidebar( 'footer_bottom' ); ?>
-					</div>
-
-				</div>
-			<?php }
+			<?php
 		}
 	}
 }
@@ -3118,34 +3096,46 @@ if ( ! function_exists( 'thim_import_demo_page_builder' ) ) {
 	function thim_import_demo_page_builder() {
 		$thim_key   = sanitize_text_field( $_POST["thim_key"] );
 		$thim_value = sanitize_text_field( $_POST["thim_value"] );
+
 		if ( ! is_multisite() ) {
 			$active_plugins = get_option( 'active_plugins' );
 
 			if ( $thim_value == 'visual_composer' ) {
-				if ( ( $key = array_search( 'siteorigin-panels/siteorigin-panels.php', $active_plugins ) ) !== false ) {
-					unset( $active_plugins[ $key ] );
-					if ( ! in_array( 'js_composer/js_composer.php', $active_plugins ) ) {
-						$active_plugins[ $key ] = 'js_composer/js_composer.php';
-					}
-				} else {
-					if ( ! in_array( 'js_composer/js_composer.php', $active_plugins ) ) {
-						$active_plugins[] = 'js_composer/js_composer.php';
-					}
+				if ( $site_origin = array_search( 'siteorigin-panels/siteorigin-panels.php', $active_plugins ) ) {
+					unset( $active_plugins[ $site_origin ] );
 				}
 
+				if ( $elementor = array_search( 'elementor/elementor.php', $active_plugins ) ) {
+					unset( $active_plugins[ $elementor ] );
+				}
 
+				if ( ! in_array( 'js_composer/js_composer.php', $active_plugins ) ) {
+					$active_plugins[] = 'js_composer/js_composer.php';
+				}
 			} else if ( $thim_value == 'site_origin' ) {
-				if ( ( $key = array_search( 'js_composer/js_composer.php', $active_plugins ) ) !== false ) {
-					unset( $active_plugins[ $key ] );
-					if ( ! in_array( 'siteorigin-panels/siteorigin-panels.php', $active_plugins ) ) {
-						$active_plugins[ $key ] = 'siteorigin-panels/siteorigin-panels.php';
-					}
-				} else {
-					if ( ! in_array( 'siteorigin-panels/siteorigin-panels.php', $active_plugins ) ) {
-						$active_plugins[] = 'siteorigin-panels/siteorigin-panels.php';
-					}
+				if ( $visual_composer = array_search( 'js_composer/js_composer.php', $active_plugins ) ) {
+					unset( $active_plugins[ $visual_composer ] );
 				}
 
+				if ( $elementor = array_search( 'elementor/elementor.php', $active_plugins ) ) {
+					unset( $active_plugins[ $elementor ] );
+				}
+
+				if ( ! in_array( 'siteorigin-panels/siteorigin-panels.php', $active_plugins ) ) {
+					$active_plugins[] = 'siteorigin-panels/siteorigin-panels.php';
+				}
+			} else if ( $thim_value == 'elementor' ) {
+				if ( $visual_composer = array_search( 'js_composer/js_composer.php', $active_plugins ) ) {
+					unset( $active_plugins[ $visual_composer ] );
+				}
+
+				if ( $site_origin = array_search( 'siteorigin-panels/siteorigin-panels.php', $active_plugins ) ) {
+					unset( $active_plugins[ $site_origin ] );
+				}
+
+				if ( ! in_array( 'elementor/elementor.php', $active_plugins ) ) {
+					$active_plugins[] = 'elementor/elementor.php';
+				}
 			}
 
 			update_option( 'active_plugins', $active_plugins );
@@ -3176,6 +3166,11 @@ if ( ! function_exists( 'thim_import_add_basic_settings' ) ) {
 		//$settings[] = 'users_can_register';
 		//$settings[] = 'permalink_structure';
 		//$settings[] = 'wpb_js_use_custom';
+
+		// Elementor global settings
+		$settings[] = 'elementor_container_width';
+		$settings[] = 'elementor_space_between_widgets';
+
 		return $settings;
 	}
 }
@@ -3634,7 +3629,7 @@ if ( ! function_exists( 'thim_upload_language_files' ) ) {
 
 		// Check folder permission and create folder languages in not exist
 		if ( ! wp_mkdir_p( ABSPATH . 'wp-content/languages/' ) ) {
-			esc_html_e( 'Languages path could not be created', 'eduam' );
+			esc_html_e( 'Languages path could not be created', 'eduma' );
 		}
 
 		$prefix       = 'eduma';
@@ -3677,7 +3672,7 @@ if ( ! function_exists( 'thim_upload_language_files' ) ) {
 				) );
 
 				if ( ! $is_success ) {
-					echo '<div class="message error"><p><strong>' . __( 'Installation failed', 'eduma-demo-data' ) . '</strong></p></div>';
+					echo '<div class="message error"><p><strong>' . __( 'Installation failed', 'eduma' ) . '</strong></p></div>';
 				}
 			}
 		}
@@ -3696,19 +3691,9 @@ if ( thim_plugin_active( 'js_composer/js_composer.php' ) ) {
 }
 
 /*
- * Handle conflict betweeen Google captcha plugin vs Revolution Slider plugin
+ * Handle conflict between Google captcha plugin vs Revolution Slider plugin
  */
-if ( thim_plugin_active( 'google-captcha/google-captcha.php' ) ) {
+if ( thim_plugin_active( 'google-captcha/google-captcha.php' ) || thim_plugin_active( 'anywhere-elementor/anywhere-elementor.php' ) ) {
 	remove_filter( 'widget_text', 'do_shortcode' );
 }
 
-/*
- * Add google captcha register check to register form ( multisite case )
- */
-if ( is_multisite() && function_exists( 'gglcptch_register_check' ) ) {
-	global $gglcptch_ip_in_whitelist;
-
-	if ( ! $gglcptch_ip_in_whitelist ) {
-		add_action( 'registration_errors', 'gglcptch_register_check', 10, 1 );
-	}
-}

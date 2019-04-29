@@ -1,7 +1,7 @@
 <?php
-$class_archive = '';
-$archive_layout = get_theme_mod( 'thim_front_page_cate_display_layout' );
-$layout_type   = !empty( $archive_layout ) ? 'grid' : '';
+$class_archive  = '';
+$is_grid_layout = get_theme_mod( 'thim_front_page_cate_display_layout', false );
+$layout_type    = $is_grid_layout ? 'grid' : '';
 if ( $layout_type == 'grid' ) {
 	$class_archive = ' blog-switch-layout blog-list';
 	global $post, $wp_query;
@@ -9,7 +9,7 @@ if ( $layout_type == 'grid' ) {
 	if ( is_category() ) {
 		$total = get_queried_object();
 		$total = $total->count;
-	} elseif ( !empty( $_REQUEST['s'] ) ) {
+	} elseif ( ! empty( $_REQUEST['s'] ) ) {
 		$total = $wp_query->found_posts;
 	} else {
 		$total = wp_count_posts( 'post' );
@@ -18,6 +18,7 @@ if ( $layout_type == 'grid' ) {
 
 	if ( $total == 0 ) {
 		echo '<p class="message message-error">' . esc_html__( 'There are no available posts!', 'eduma' ) . '</p>';
+
 		return;
 	} elseif ( $total == 1 ) {
 		$index = esc_html__( 'Showing only one result', 'eduma' );

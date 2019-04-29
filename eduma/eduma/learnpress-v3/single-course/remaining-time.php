@@ -4,12 +4,19 @@
  *
  * @author  ThimPress
  * @package LearnPress/Templates
- * @version 3.0.4
+ * @version 3.2.0
  */
 
 defined( 'ABSPATH' ) or die();
 
+$user = LP_Global::user();
 $course = LP_Global::course();
+
+if ( ! $user->has_enrolled_course( $course->get_id() ) ) {
+	return;
+}
+
+
 if ( isset( $remaining_time ) && $course->get_duration() ) {
 ?>
 <div class="course-remaining-time message message-warning learn-press-message">

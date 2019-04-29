@@ -49,6 +49,23 @@ function thim_get_all_plugins_require( $plugins ) {
 		),
 
 		array(
+			'name'        => 'Elementor Page Builder',
+			'slug'        => 'elementor',
+			'required'    => false,
+			'version'     => '2.4.5',
+			'description' => 'The most advanced frontend drag & drop page builder. Create high-end, pixel perfect websites at record speeds. Any theme, any page, any design.',
+		),
+
+		array(
+			'name'        => 'Anywhere Elementor',
+			'slug'        => 'anywhere-elementor',
+			'required'    => false,
+			'version'     => '1.1',
+			'description' => 'Allows you to insert elementor pages and library templates anywhere using shortcodes.',
+			'add-on'      => true,
+		),
+
+		array(
 			'name'        => 'Black Studio TinyMCE Widget',
 			'slug'        => 'black-studio-tinymce-widget',
 			'required'    => false,
@@ -116,7 +133,6 @@ function thim_get_all_plugins_require( $plugins ) {
 			'version'     => '1.3',
 			'description' => 'A plugin that allows you to show off your portfolio. By ThimPress.',
 		),
-
 		array(
 			'name'        => 'Thim Twitter',
 			'slug'        => 'thim-twitter',
@@ -127,7 +143,6 @@ function thim_get_all_plugins_require( $plugins ) {
 			'description' => 'Thim Twitter plugin helps you get feed on your account easily. By Thimpress.',
 			'add-on'      => true,
 		),
-
 		array(
 			'name'        => 'BuddyPress',
 			'slug'        => 'buddypress',
@@ -135,7 +150,6 @@ function thim_get_all_plugins_require( $plugins ) {
 			'version'     => '2.9.4',
 			'description' => 'BuddyPress is a suite of components that are common to a typical social network',
 		),
-
 		array(
 			'name'        => 'LearnPress',
 			'slug'        => 'learnpress',
@@ -143,7 +157,6 @@ function thim_get_all_plugins_require( $plugins ) {
 			'version'     => '3.0',
 			'description' => 'LearnPress is a WordPress complete solution for creating a Learning Management System (LMS). It can help you to create courses, lessons and quizzes. By ThimPress.',
 		),
-
 		array(
 			'name'        => 'LearnPress Certificates',
 			'slug'        => 'learnpress-certificates',
@@ -154,7 +167,6 @@ function thim_get_all_plugins_require( $plugins ) {
 			'description' => 'An addon for LearnPress plugin to create certificate for a course By ThimPress.',
 			'add-on'      => true,
 		),
-
 		array(
 			'name'        => 'LearnPress Collections',
 			'slug'        => 'learnpress-collections',
@@ -165,7 +177,6 @@ function thim_get_all_plugins_require( $plugins ) {
 			'description' => 'Collecting related courses into one collection by administrator By ThimPress.',
 			'add-on'      => true,
 		),
-
 		array(
 			'name'        => 'LearnPress - Paid Memberships Pro',
 			'slug'        => 'learnpress-paid-membership-pro',
@@ -193,7 +204,6 @@ function thim_get_all_plugins_require( $plugins ) {
 			'slug'        => 'learnpress-commission',
 			'premium'     => true,
 			'required'    => false,
-			'icon'        => 'https://plugins.thimpress.com/downloads/images/learnpress-commission.png',
 			'version'     => '3.0',
 			'description' => 'Commission add-on for LearnPress.',
 			'add-on'      => true,
@@ -371,6 +381,7 @@ function thim_get_all_plugins_require( $plugins ) {
 			'description' => 'Wishlist feature By ThimPress.',
 			'add-on'      => true,
 		),
+
 		array(
 			'name'        => 'LearnPress bbPress',
 			'slug'        => 'learnpress-bbpress',
@@ -421,6 +432,16 @@ function thim_get_all_plugins_require( $plugins ) {
 			'required'    => false,
 			'version'     => '1.0.0',
 			'description' => 'Demo data for the theme Eduma.',
+		),
+
+		array(
+			'name'        => 'LearnPress 2Checkout Payment',
+			'slug'        => 'learnpress-2checkout-payment',
+			'premium'     => true,
+			'required'    => false,
+			'version'     => '3.0.0',
+			'description' => '2Checkout payment method for LearnPress',
+			'add-on'      => true,
 		),
 	);
 

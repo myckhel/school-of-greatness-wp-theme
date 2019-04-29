@@ -13,7 +13,7 @@
     * */
     function thim_get_url_parameters(sParam) {
         var sPageURL = window.location.search.substring(1);
-        console.log(sPageURL);
+
         var sURLVariables = sPageURL.split('&');
         for (var i = 0; i < sURLVariables.length; i++) {
             var sParameterName = sURLVariables[i].split('=');
@@ -39,6 +39,9 @@
 
         load: function() {
             this.thim_menu();
+            this.thim_carousel();
+            this.thim_contentslider();
+            this.counter_box();
         },
 
         resize: function() {
@@ -150,7 +153,7 @@
             });
 
             // Show login popup when click to LP buttons
-            $('body:not(".logged-in") .enroll-course .button-enroll-course, body:not(".logged-in") form.purchase-course:not(".guest_checkout") .button').
+            $('body:not(".logged-in") .enroll-course .button-enroll-course, body:not(".logged-in") form.purchase-course:not(".guest_checkout") .button:not(.button-add-to-cart)').
                 on('click', function(e) {
                     e.preventDefault();
 
@@ -201,7 +204,9 @@
                     data   : data,
                     success: function(response) {
                         $elem.removeClass('loading');
-                        $elem.find('.popup-message').html(response.data.message);
+                        if (typeof response.data !== 'undefined') {
+                            $elem.find('.popup-message').html(response.data.message);
+                        }
                         if (response.success === true) {
                             if ($form.hasClass('auto_login')) {
                                 window.location.href = redirect_url;
@@ -358,6 +363,8 @@
                     $('#thim-course-archive').replaceWith($document.find('#thim-course-archive'));
                     $('.learn-press-pagination ul.page-numbers').
                         replaceWith($document.find('.learn-press-pagination ul.page-numbers'));
+                    $('.thim-course-top .course-index span').
+                        replaceWith($document.find('.thim-course-top .course-index span'));
                 });
             };
 
@@ -383,6 +390,7 @@
             /*
             * Handle pagination ajax
             * */
+
             $(document).on('click', '#lp-archive-courses > .learn-press-pagination a.page-numbers', function(e) {
                 e.preventDefault();
 
@@ -390,11 +398,20 @@
                     'scrollTop': $('.site-content').offset().top - 140,
                 }, 1000);
 
-                let url = $(this).attr('href'),
-                    arr = url.split('/'),
-                    pageNum = arr[arr.indexOf('page') + 1],
+                let pageNum = parseInt($(this).text()),
                     paged = pageNum ? pageNum : 1,
-                    cateArr = [], instructorArr = [];
+                    cateArr = [], instructorArr = [],
+                    cpage = $('.learn-press-pagination.navigation.pagination ul.page-numbers li span.page-numbers.current').text(),
+                    isNext = $(this).hasClass('next') && $(this).hasClass('page-numbers'),
+                    isPrev = $(this).hasClass('prev') && $(this).hasClass('page-numbers');
+                if(!pageNum){
+                    if(isNext){
+                            paged = parseInt(cpage)+1;
+                    }
+                    if(isPrev){
+                            paged = parseInt(cpage)-1;
+                    }
+                }
 
                 $('form.thim-course-filter').find('input.filtered').each(function() {
                     switch ($(this).attr('name')) {
@@ -479,8 +496,6 @@
 
                     cateArr.push(cateID);
                 }
-                
-                console.log( cateArr );
 
                 sendData.course_cate_filter = cateArr;
                 sendData.course_instructor_filter = instructorArr;
@@ -537,19 +552,58 @@
                 latestScroll = current;
             });
 
+            //Submenu position
+            $('.wrapper-container:not(.mobile-menu-open) .site-header .navbar-nav > .menu-item').each(function() {
+                if ($('>.sub-menu', this).length <= 0) {
+                    return;
+                }
+
+                let elm = $('>.sub-menu', this),
+                    off = elm.offset(),
+                    left = off.left,
+                    width = elm.width();
+
+                let navW = $('.thim-nav-wrapper').width(),
+                    isEntirelyVisible = (left + width <= navW);
+
+                if (!isEntirelyVisible) {
+                    elm.addClass('dropdown-menu-right');
+                } else {
+                    let subMenu2 = elm.find('>.menu-item>.sub-menu');
+
+                    if (subMenu2.length <= 0) {
+                        return;
+                    }
+
+                    let off = subMenu2.offset(),
+                        left = off.left,
+                        width = subMenu2.width();
+
+                    let isEntirelyVisible = (left + width <= navW);
+
+                    if (!isEntirelyVisible) {
+                        elm.addClass('dropdown-left-side');
+                    }
+                }
+            });
+
             //Show submenu when hover
-            $('.wrapper-container:not(.mobile-menu-open) .site-header .navbar-nav >li,.wrapper-container:not(.mobile-menu-open) .site-header .navbar-nav li,.site-header .navbar-nav li ul li').
-                on({
-                    'mouseenter': function() {
-                        $(this).children('.sub-menu').stop(true, false).fadeIn(250);
-                    },
-                    'mouseleave': function() {
-                        $(this).
-                            children('.sub-menu').
-                            stop(true, false).
-                            fadeOut(250);
-                    },
-                });
+            // var $menuItem = $(
+            //     '.wrapper-container:not(.mobile-menu-open) .site-header .navbar-nav >li,' +
+            //     '.wrapper-container:not(.mobile-menu-open) .site-header .navbar-nav li,' +
+            //     '.site-header .navbar-nav li ul li');
+            //
+            // $menuItem.on({
+            //     'mouseenter': function() {
+            //         $(this).children('.sub-menu').stop(true, false).fadeIn(250);
+            //     },
+            //     'mouseleave': function() {
+            //         $(this).
+            //             children('.sub-menu').
+            //             stop(true, false).
+            //             fadeOut(250);
+            //     },
+            // });
 
             let $headerLayout = $('header#masthead');
             let magicLine = function() {
@@ -569,6 +623,7 @@
                             css('left', Math.round(menu_child_left + menu_left)).
                             data('magic-width', magic.width()).
                             data('magic-left', magic.position().left);
+
                     } else {
                         var first_menu = $(
                             '#masthead .navbar-nav>li.menu-item:first-child');
@@ -620,47 +675,135 @@
                     $subMenuDistance = $subMenuWidth / 2,
                     paddingContainer = 15;
 
-                // console.log( $menuItem );
-
-                if ($('body').hasClass('rtl')) {
-                    var $menuItemDistance = $menuItem.offset().left - ($menuItemWidth / 2);
-
-                    if ($menuItemDistance < $subMenuDistance) {
-                        var leftPosition = $menuItem.offset().left - $container.offset().left - paddingContainer;
-
-                        $subMenu.css({
-                            'left'     : -leftPosition,
-                            'transform': 'translateX(0)',
-                        });
-                    }
-
-                } else {
-                    var $menuItemDistance = $containerWidth - ($menuItem.offset().left - $container.offset().left) -
-                        ($menuItemWidth / 2);
-
-                    console.log($subMenu.offset());
-
-                    if ($menuItemDistance < $subMenuDistance) {
-                        var rightPosition = $menuItemDistance - ($menuItemWidth / 2) + paddingContainer;
-                        $subMenu.css({
-                            'right'    : -rightPosition,
-                            'transform': 'translateX(0)',
-                        });
-                    }
-                }
             };
+        },
 
-            if ($headerLayout.hasClass('header_v1')) {
-                var $menuItemRoot = $headerLayout.find(
-                    '.menu-item.widget_area:not(.dropdown_full_width), .menu-item.multicolumn:not(.dropdown_full_width), .navbar-nav>li.tc-menu-layout-column, .navbar-nav>li.tc-menu-layout-builder');
-                // console.log( $menuItemRoot );
-                $menuItemRoot.each(function() {
-                    // console.log( 1111 );
-                    // subMenuPosition($(this));
+        thim_carousel: function($scope) {
+            if (jQuery().owlCarousel) {
+                $('.thim-gallery-images').owlCarousel({
+                    autoPlay   : false,
+                    singleItem : true,
+                    stopOnHover: true,
+                    pagination : true,
+                    autoHeight : false,
+                });
+
+                $('.thim-carousel-wrapper').each(function() {
+                    var item_visible = $(this).data('visible') ? parseInt(
+                        $(this).data('visible')) : 4,
+                        item_desktopsmall = $(this).data('desktopsmall') ? parseInt(
+                            $(this).data('desktopsmall')) : item_visible,
+                        itemsTablet = $(this).data('itemtablet') ? parseInt(
+                            $(this).data('itemtablet')) : 2,
+                        itemsMobile = $(this).data('itemmobile') ? parseInt(
+                            $(this).data('itemmobile')) : 1,
+                        pagination = !!$(this).data('pagination'),
+                        navigation = !!$(this).data('navigation'),
+                        autoplay = $(this).data('autoplay') ? parseInt(
+                            $(this).data('autoplay')) : false,
+                        navigation_text = ($(this).data('navigation-text') &&
+                            $(this).data('navigation-text') === '2') ? [
+                            '<i class=\'fa fa-long-arrow-left \'></i>',
+                            '<i class=\'fa fa-long-arrow-right \'></i>',
+                        ] : [
+                            '<i class=\'fa fa-chevron-left \'></i>',
+                            '<i class=\'fa fa-chevron-right \'></i>',
+                        ];
+
+                    $(this).owlCarousel({
+                        items            : item_visible,
+                        itemsDesktop     : [1200, item_visible],
+                        itemsDesktopSmall: [1024, item_desktopsmall],
+                        itemsTablet      : [768, itemsTablet],
+                        itemsMobile      : [480, itemsMobile],
+                        navigation       : navigation,
+                        pagination       : pagination,
+                        lazyLoad         : true,
+                        autoPlay         : autoplay,
+                        navigationText   : navigation_text,
+                    });
+                });
+
+                $('.thim-carousel-course-categories .thim-course-slider, .thim-carousel-course-categories-tabs .thim-course-slider').
+                    each(function() {
+                        var item_visible = $(this).data('visible') ? parseInt($(this).data('visible')) : 7,
+                            item_desktop = $(this).data('desktop') ? parseInt($(this).data('desktop')) : 7,
+                            item_desktopsmall = $(this).data('desktopsmall')
+                                ? parseInt($(this).data('desktopsmall'))
+                                : 6,
+                            item_tablet = $(this).data('tablet') ? parseInt($(this).data('tablet')) : 4,
+                            item_mobile = $(this).data('mobile') ? parseInt($(this).data('mobile')) : 2,
+                            pagination = !!$(this).data('pagination'),
+                            navigation = !!$(this).data('navigation'),
+                            autoplay = $(this).data('autoplay') ? parseInt($(this).data('autoplay')) : false,
+                            is_rtl = $('body').hasClass('rtl');
+
+                        $(this).owlCarousel({
+                            items            : item_visible,
+                            itemsDesktop     : [1800, item_desktop],
+                            itemsDesktopSmall: [1024, item_desktopsmall],
+                            itemsTablet      : [768, item_tablet],
+                            itemsMobile      : [480, item_mobile],
+                            navigation       : navigation,
+                            pagination       : pagination,
+                            autoPlay         : autoplay,
+                            navigationText   : [
+                                '<i class=\'fa fa-chevron-left \'></i>',
+                                '<i class=\'fa fa-chevron-right \'></i>',
+                            ],
+                        });
+                    });
+            }
+        },
+
+        thim_contentslider: function($scope) {
+            $('.thim-testimonial-slider').each(function() {
+                var elem = $(this),
+                    item_visible = parseInt(elem.data('visible')),
+                    item_time = parseInt(elem.data('time')),
+                    autoplay = elem.data('auto') ? true : false,
+                    item_ratio = elem.data('ratio') ? elem.data('ratio') : 1.18,
+                    item_padding = elem.data('padding') ? elem.data('padding') : 15,
+                    item_activepadding = elem.data('activepadding') ? elem.data(
+                        'activepadding') : 0,
+                    item_width = elem.data('width') ? elem.data('width') : 100,
+                    mousewheel = !!elem.data('mousewheel');
+
+                var testimonial_slider = $(this).thimContentSlider({
+                    items            : elem,
+                    itemsVisible     : item_visible,
+                    mouseWheel       : mousewheel,
+                    autoPlay         : autoplay,
+                    pauseTime        : item_time,
+                    itemMaxWidth     : item_width,
+                    itemMinWidth     : item_width,
+                    activeItemRatio  : item_ratio,
+                    activeItemPadding: item_activepadding,
+                    itemPadding      : item_padding,
+                });
+
+            });
+        },
+
+        counter_box: function() {
+            if (jQuery().waypoint) {
+                jQuery('.counter-box').waypoint(function() {
+                    jQuery(this).find('.display-percentage').each(function() {
+                        var percentage = jQuery(this).data('percentage');
+                        jQuery(this).
+                            countTo({
+                                from           : 0,
+                                to             : percentage,
+                                refreshInterval: 40,
+                                speed          : 2000,
+                            });
+                    });
+                }, {
+                    triggerOnce: true,
+                    offset     : '80%',
                 });
             }
-
-        },
+        }
 
     };
 
@@ -674,5 +817,31 @@
 
     $(window).resize(function() {
         thim_eduma.resize();
+    });
+
+    $(window).on('elementor/frontend/init', function() {
+        elementorFrontend.hooks.addAction('frontend/element_ready/thim-carousel-post.default',
+            thim_eduma.thim_carousel);
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/thim-courses.default',
+            thim_eduma.thim_carousel);
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/thim-course-categories.default',
+            thim_eduma.thim_carousel);
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/thim-our-team.default',
+            thim_eduma.thim_carousel);
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/thim-gallery-images.default',
+            thim_eduma.thim_carousel);
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/thim-list-instructors.default',
+            thim_eduma.thim_carousel);
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/thim-testimonials.default',
+            thim_eduma.thim_contentslider);
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/thim-counters-box.default',
+            thim_eduma.counter_box);
     });
 })(jQuery);

@@ -310,45 +310,6 @@ footer#colophon{
                 }
             }
         }
-        .thim_footer_second {
-            border-top: 1px solid #eeeeee;
-            ul {
-                li {
-                    margin-bottom: 0;
-                }
-            }
-            .widget_nav_menu {
-                ul {
-                    li {
-                        display: inline-block;
-                        margin-bottom: 0;
-                        line-height: 38px;
-                        padding-right: 38px;
-                        .sub-menu {
-                            display: none;
-                        }
-                    }
-                }
-            }
-            .thim-social {
-                margin-top: 0;
-                li {
-                    a {
-                        width: 40px;
-                        height: 40px;
-                        line-height: 40px;
-                        border-color: #eeeeee;
-                        display: block;
-                        color: #777777;
-                        margin-right: 0;
-                        margin-left: 10px;
-                        i {
-                            line-height: 40px;
-                        }
-                    }
-                }
-            }
-        }
     }
     .mc4wp-form{
         margin-top: 10px;
@@ -490,6 +451,85 @@ footer#colophon{
             &:hover{
                 text-decoration: underline;
             }
+        }
+    }
+}
+
+.thim_footer_second {
+    border-top: 1px solid #eee;
+    ul {
+        li {
+            margin-bottom: 0;
+        }
+    }
+    .widget_nav_menu, .elementor-widget-wp-widget-nav_menu {
+        ul {
+            li {
+                display: inline-block;
+                margin-bottom: 0;
+                line-height: 38px;
+                padding-right: 38px;
+                .sub-menu {
+                    display: none;
+                }
+            }
+        }
+    }
+    .thim-social {
+        margin-top: 0;
+        li {
+            a {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                border-color: #eee;
+                display: block;
+                color: #777;
+                margin-right: 0;
+                margin-left: 10px;
+                i {
+                    line-height: 40px;
+                }
+            }
+        }
+    }
+}
+
+.thim-demo-university-3 .footer_widget .elementor-widget-wp-widget-text .elementor-widget-container {
+    >h3, >h5 {
+        margin-top: 27px;
+        margin-bottom: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        line-height: 40px;
+    }
+}
+
+.thim-demo-university-4 .footer_widget .elementor-widget-wp-widget-text .elementor-widget-container {
+    >h3, >h5 {
+        margin-top: 6px;
+        margin-bottom: 4px;
+        font-weight: 500;
+        font-size: 16px;
+    }
+}
+
+
+footer#colophon.thim-footer-new-eduma .footer .elementor-widget-wp-widget-text .elementor-widget-container {
+    >h3, >h5 {
+        font-size: 18px;
+        font-weight: 300;
+        margin-top: 0;
+        line-height: 22px;
+        margin-bottom: 25px;
+        &:after {
+            background-color: rgba(138,138,145,.5);
+            width: 40px;
+            content: "";
+            height: 1px;
+            display: block;
+            margin-top: 15px;
         }
     }
 }

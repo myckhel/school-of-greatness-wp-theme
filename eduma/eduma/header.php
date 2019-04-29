@@ -21,18 +21,18 @@
 
 <!-- Mobile Menu-->
 <div class="mobile-menu-wrapper">
-	<div class="mobile-menu-inner">
-		<div class="icon-wrapper">
-			<div class="menu-mobile-effect navbar-toggle close-icon" data-effect="mobile-effect">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</div>
-		</div>
-		<nav class="mobile-menu-container mobile-effect">
-			<?php get_template_part( 'inc/header/menu-mobile' ); ?>
-		</nav>
-	</div>
+    <div class="mobile-menu-inner">
+        <div class="icon-wrapper">
+            <div class="menu-mobile-effect navbar-toggle close-icon" data-effect="mobile-effect">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </div>
+        </div>
+        <nav class="mobile-menu-container mobile-effect">
+            <?php get_template_part( 'inc/header/menu-mobile' ); ?>
+        </nav>
+    </div>
 </div>
 
 <div id="wrapper-container" class="wrapper-container">

@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit();
 $user = LP_Global::user();
 
 $theme_options_data         = get_theme_mods();
-$course_item_excerpt_length = get_theme_mod( 'thim_learnpress_excerpt_length', 25 );
+$course_item_excerpt_length = intval( get_theme_mod( 'thim_learnpress_excerpt_length', 25 ) );
 
 $class = isset( $theme_options_data['thim_learnpress_cate_grid_column'] ) && $theme_options_data['thim_learnpress_cate_grid_column'] ? 'course-grid-' . $theme_options_data['thim_learnpress_cate_grid_column'] : 'course-grid-3';
 if ( ! defined( 'ABSPATH' ) ) {
@@ -61,11 +61,11 @@ $class .= ' lpr_course';
 				<?php learn_press_courses_loop_item_price(); ?>
 			</div>
 
-			<?php if ( intval($course_item_excerpt_length) ): ?>
+			<?php if ( $course_item_excerpt_length ): ?>
 				<div class="course-description">
 					<?php
 					do_action( 'learn_press_before_course_content' );
-					echo thim_excerpt( $theme_options_data['thim_learnpress_excerpt_length'] );
+					echo thim_excerpt( $course_item_excerpt_length );
 					do_action( 'learn_press_after_course_content' );
 					?>
 				</div>

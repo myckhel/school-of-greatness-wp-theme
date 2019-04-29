@@ -61,6 +61,22 @@ thim_customizer()->add_field(
 
 thim_customizer()->add_field(
 	array(
+		'id'       => 'thim_archive_single_hide_breadcrumbs',
+		'type'     => 'switch',
+		'label'    => esc_html__( 'Hidden Breadcrumb', 'eduma' ),
+		'tooltip'  => esc_html__( 'Allows you can hidden breadcrumbs on page title.', 'eduma' ),
+		'section'  => 'blog_singular',
+		'default'  => false,
+		'priority' => 20,
+		'choices'  => array(
+			true  => esc_html__( 'On', 'eduma' ),
+			false => esc_html__( 'Off', 'eduma' ),
+		),
+	)
+);
+
+thim_customizer()->add_field(
+	array(
 		'type'      => 'image',
 		'id'        => 'thim_archive_single_top_image',
 		'label'     => esc_html__( 'Top Image', 'eduma' ),

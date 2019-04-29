@@ -15,12 +15,9 @@ if( count($co_instructors) < $visible_item ) {
 
 $pagination = ( !empty($instance['show_pagination']) && $instance['show_pagination'] !== 'no' ) ? 1 : 0;
 
-//$cout = _learn_press_count_users_enrolled_courses();
-// Using $co_instructors
 if ( ! empty( $co_instructors ) ) {
     $html = '<div class="thim-carousel-wrapper thim-carousel-list-instructors" data-visible="'.$visible_item.'" data-navigation="1" data-pagination="'.$pagination.'" data-autoplay="' . esc_attr( $autoplay ) . '">';
     foreach ( $co_instructors as $key => $instructor ) {
-        //$aaaa = learn_press_get_course_of_user_instructor();
         $text_review = ( $instructor["count_rate"] > 1 ) ? $instructor["count_rate"] . ' Reviews' : $instructor["count_rate"] . ' Review';
         $lp_info = get_the_author_meta( 'lp_info', $instructor["user_id"] );
         $link    = learn_press_user_profile_link( $instructor["user_id"] );
@@ -47,5 +44,3 @@ if ( ! empty( $co_instructors ) ) {
 }
 
 echo  ent2ncr($html);
-
-?>

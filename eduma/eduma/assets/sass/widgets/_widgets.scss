@@ -480,17 +480,24 @@
 }
 
 .img_position {
-	.vc_column-inner {
+	.elementor-widget.elementor-widget-image {
+		position: static;
+	}
+	.vc_column-inner,
+	.elementor-widget-wrap {
+		.elementor-widget-image,
 		.thim-widget-single-images {
 			img {
 				position: absolute;
 			}
+
 			&:nth-child(1) {
 				img {
 					top: 50px;
 					z-index: 2;
 				}
 			}
+
 			&:nth-child(2) {
 				img {
 					bottom: -60px;
@@ -765,6 +772,7 @@
 	margin-top: -12px;
 	padding-right: 20px;
 	margin-bottom: -10px;
+
 	p {
 		font-size: 18px;
 		margin-bottom: 15px;
@@ -919,6 +927,7 @@
 
 .this-bottom-grad {
 	text-align: center;
+	.elementor-widget-wp-widget-text, .elementor-widget-thim-social,
 	.widget_text, .widget_social, .wpb_text_column, .thim-widget-social {
 		display: inline-block;
 		vertical-align: middle;

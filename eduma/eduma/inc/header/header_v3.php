@@ -14,12 +14,11 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( wp_is_mobile() ) : ?>
-			<div class="menu-mobile-effect navbar-toggle" data-effect="mobile-effect">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</div>
-		<?php endif; ?>
+        <div class="menu-mobile-effect navbar-toggle" data-effect="mobile-effect">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </div>
+
 	</div>
 </div>

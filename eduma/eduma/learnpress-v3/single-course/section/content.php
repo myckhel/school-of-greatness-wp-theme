@@ -21,7 +21,6 @@ if ( ! isset( $section ) ) {
 $user   = LP_Global::user();
 $course = LP()->global['course'];
 $index  = 0;
-//xxx($section->get_order());
 ?>
 
 <?php if ( $items = $section->get_items() ) { ?>

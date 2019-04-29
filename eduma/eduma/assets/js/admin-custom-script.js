@@ -1,5 +1,5 @@
-jQuery(function ($) {
-    $(document).ready(function () {
+jQuery(function($) {
+    $(document).ready(function() {
         thim_custom_admin_select();
 
         thim_eduma_install_demo();
@@ -13,7 +13,7 @@ jQuery(function ($) {
 
     var thim_vc_template_ui = window.thim_vc_template_ui = {
 
-        init: function () {
+        init: function() {
             this.vc_filter_template();
             this.vc_effect_add_template();
         },
@@ -21,37 +21,33 @@ jQuery(function ($) {
         /**
          * Filter category
          */
-        vc_filter_template: function () {
-            $('.cat-filter').on('click', 'li', function (e) {
+        vc_filter_template: function() {
+            $('.cat-filter').on('click', 'li', function(e) {
                 var catslug = $(this).attr('data-filter');
                 $('.cat-filter li').removeClass('active');
                 $(this).addClass('active');
                 $('[data-tab=default_templates]').find('.vc_ui-template').hide();
-                console.log(catslug);
                 $('[data-tab=default_templates]').find('.' + catslug).show();
             });
-
         },
 
         /**
          * Add loading when click on add template button.
          */
-        vc_effect_add_template: function () {
-            $('.vc_ui-list-bar-item-actions').on('click', function () {
+        vc_effect_add_template: function() {
+            $('.vc_ui-list-bar-item-actions').on('click', function() {
                 $(this).addClass('adding');
             });
-            $(document).ajaxComplete(function () {
+            $(document).ajaxComplete(function() {
                 $('.vc_ui-list-bar-item-actions').removeClass('adding');
             });
         },
 
-
     };
 
-
     function thim_custom_admin_select() {
-        $('#customize-control-thim_config_logo_mobile select').on('change', function () {
-            if ($(this).val() == "custom_logo") {
+        $('#customize-control-thim_config_logo_mobile select').on('change', function() {
+            if ($(this).val() == 'custom_logo') {
                 $('#customize-control-thim_logo_mobile').show();
                 $('#customize-control-thim_sticky_logo_mobile').show();
             } else {
@@ -60,17 +56,16 @@ jQuery(function ($) {
             }
         }).trigger('change');
 
-        $('#customize-control-thim_page_builder_chosen select').on('change', function () {
-            if ($(this).val() == "visual_composer") {
+        $('#customize-control-thim_page_builder_chosen select').on('change', function() {
+            if ($(this).val() == 'visual_composer') {
                 $('#customize-control-thim_footer_bottom_bg_img').show();
             } else {
                 $('#customize-control-thim_footer_bottom_bg_img').hide();
             }
         }).trigger('change');
 
-
-        $('#customize-control-thim_box_layout select').on('change', function () {
-            if ($(this).val() == "boxed") {
+        $('#customize-control-thim_box_layout select').on('change', function() {
+            if ($(this).val() == 'boxed') {
                 $('#customize-control-thim_user_bg_pattern').show();
                 $('#customize-control-thim_bg_pattern').show();
                 $('#customize-control-thim_bg_upload').show();
@@ -89,8 +84,7 @@ jQuery(function ($) {
             }
         }).trigger('change');
 
-
-        $('#customize-control-thim_preload select').on('change', function () {
+        $('#customize-control-thim_preload select').on('change', function() {
             if ($(this).val() == 'image') {
                 $('#customize-control-thim_preload_image').show();
             } else {
@@ -98,7 +92,6 @@ jQuery(function ($) {
             }
         }).trigger('change');
     }
-
 
     function thim_eduma_30_install_demo() {
         if ($('.tc-importer-wrapper').length == 0) {
@@ -118,6 +111,7 @@ jQuery(function ($) {
         $html += '<option value="">Select</option>';
         $html += '<option value="site_origin">Site Origin</option>';
         $html += '<option value="visual_composer">Visual Composer</option>';
+        $html += '<option value="elementor">Elementor</option>';
         $html += '</select></div>';
 
         $('.tc-importer-wrapper').prepend($html);
@@ -126,30 +120,27 @@ jQuery(function ($) {
             $('.tc-importer-wrapper').addClass('overlay');
         }
 
-        $(document).on('change', '#thim-select-page-builder', function () {
+        $(document).on('change', '#thim-select-page-builder', function() {
 
             var elem = $(this),
                 elem_val = elem.val(),
                 elem_parent = elem.parents('.tc-importer-wrapper'),
                 data = {
-                    action: 'thim_update_theme_mods',
-                    thim_key: 'thim_page_builder_chosen',
-                    thim_value: elem_val
+                    action    : 'thim_update_theme_mods',
+                    thim_key  : 'thim_page_builder_chosen',
+                    thim_value: elem_val,
                 };
 
             if (elem_val !== '') {
-                if (elem_val == 'visual_composer') {
-                    elem_parent.addClass('visual_composer');
-                } else {
-                    elem_parent.removeClass('visual_composer');
-                }
+
+                elem_parent.attr('class', 'tc-importer-wrapper ' + elem_val);
+
                 elem_parent.removeClass('overlay').addClass('loading');
                 $.post(ajaxurl, data, function (response) {
-                    console.log(response);
                     elem_parent.removeClass('loading');
                 });
             } else {
-                elem_parent.addClass('overlay');
+                elem_parent.attr('class', 'tc-importer-wrapper overlay');
             }
 
         });
@@ -173,21 +164,20 @@ jQuery(function ($) {
             $('.thim-demo-browser').addClass('overlay');
         }
 
-        $(document).on('change', '#thim-select-page-builder', function () {
+        $(document).on('change', '#thim-select-page-builder', function() {
 
             var elem = $(this),
                 elem_val = elem.val(),
                 elem_parent = elem.parents('.thim-demo-browser'),
                 data = {
-                    action: 'thim_update_theme_mods',
-                    thim_key: 'thim_page_builder_chosen',
-                    thim_value: elem_val
+                    action    : 'thim_update_theme_mods',
+                    thim_key  : 'thim_page_builder_chosen',
+                    thim_value: elem_val,
                 };
 
             if (elem_val !== '') {
                 elem_parent.removeClass('overlay').addClass('loading');
-                $.post(ajaxurl, data, function (response) {
-                    console.log(response);
+                $.post(ajaxurl, data, function(response) {
                     elem_parent.removeClass('loading');
                 });
             } else {
@@ -205,7 +195,7 @@ jQuery(function ($) {
         }
 
         check_dependency();
-        $(document).on('change', '#thim_custom_heading', function (event) {
+        $(document).on('change', '#thim_custom_heading', function(event) {
             check_dependency();
         });
 
@@ -232,10 +222,10 @@ jQuery(function ($) {
                 'thim_learnpress_cate_heading_text_color',
                 'thim_learnpress_cate_sub_heading_text_color',
                 'thim_learnpress_cate_hide_title',
-                'thim_learnpress_cate_hide_breadcrumbs'
+                'thim_learnpress_cate_hide_breadcrumbs',
             ];
 
-            fields_name.forEach(function (field_name) {
+            fields_name.forEach(function(field_name) {
                 var $input_field = $('[name="' + field_name + '"]');
                 var $field = $input_field.closest('.form-field');
 
@@ -249,15 +239,15 @@ jQuery(function ($) {
     }
 
     var custom_uploader;
-    $(document).on('click', '#image_level', function (e) {
+    $(document).on('click', '#image_level', function(e) {
         //e.preventDefault();
         //Extend the wp.media object
         custom_uploader = wp.media.frames.file_frame = wp.media({
-            title: 'Choose Image',
-            button: {
-                text: 'Choose Image'
+            title   : 'Choose Image',
+            button  : {
+                text: 'Choose Image',
             },
-            multiple: false
+            multiple: false,
         });
         //If the uploader object has already been created, reopen the dialog
         if (custom_uploader) {
@@ -265,13 +255,10 @@ jQuery(function ($) {
             //return;
         }
 
-
-
         //When a file is selected, grab the URL and set it as the text field's value
-        custom_uploader.on('select', function () {
+        custom_uploader.on('select', function() {
             attachment = custom_uploader.state().get('selection').first().toJSON();
             jQuery('#image_level').val(attachment.url);
-
 
             //Open the uploader dialog
             custom_uploader.close();

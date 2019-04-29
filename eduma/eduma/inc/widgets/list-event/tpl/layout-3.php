@@ -123,4 +123,3 @@ if ( $events->have_posts() ) {
 }
 wp_reset_postdata();
 
-?>

@@ -13,7 +13,6 @@ vc_map( array(
 			'heading'     => esc_html__( 'Use Captcha?', 'eduma' ),
 			'param_name'  => 'captcha',
 			'desc'        => esc_html__( 'Use captcha in register and login form', 'eduma' ),
-			'std'         => true,
 		),
 
 		array(

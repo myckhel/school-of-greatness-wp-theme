@@ -36,7 +36,15 @@ footer#colophon .footer .thim-footer-location .social a,
 }
 
 
-footer#colophon .footer .widget-title {
+footer#colophon .footer .widget-title,
+footer#colophon .footer .elementor-widget-wp-widget-text .elementor-widget-container >h3,
+footer#colophon .footer .elementor-widget-wp-widget-text .elementor-widget-container >h5,
+.thim-demo-university-3 .footer_widget .elementor-widget-wp-widget-text .elementor-widget-container >h3,
+footer#colophon.thim-footer-new-eduma .footer .elementor-widget-wp-widget-text .elementor-widget-container >h3,
+.thim-demo-university-4 .footer_widget .elementor-widget-wp-widget-text .elementor-widget-container >h3,
+footer#colophon.thim-footer-new-eduma .footer .elementor-widget-wp-widget-text .elementor-widget-container >h5,
+.thim-demo-university-4 .footer_widget .elementor-widget-wp-widget-text .elementor-widget-container >h5,
+.thim-demo-university-3 .footer_widget .elementor-widget-wp-widget-text .elementor-widget-container >h5{
 	color: $thim_thim_footer_color_title;
 }
 

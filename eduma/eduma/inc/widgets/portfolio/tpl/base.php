@@ -1,9 +1,5 @@
 <?php
-/**
- * Created by lucky boy.
- * User: dong-it
- */
-//xxx($instance);
+
 global $post;
 $category        = empty( $instance['portfolio_category'] ) ? array() : $instance['portfolio_category'];
 $filter_hiden    = $instance['filter_hiden'] ? $instance['filter_hiden'] : false;
@@ -34,7 +30,7 @@ if ( $filter_position == "left" ) {
 }
 
 // Gutter
-if ( $gutter == true ) {
+if ( $gutter ) {
 	$class_gutter = " gutter";
 } else {
 	$class_gutter = "";
@@ -121,6 +117,8 @@ if ( ( is_array( $category ) && !empty( $category ) ) || ( !is_array( $category 
 		'terms'    => $category
 	);
 }
+
+$argss['post_status'] = 'publish';
 
 $argss = apply_filters( 'thim_query_portfolio', $argss );
 
@@ -416,7 +414,7 @@ if ( is_array( $gallery->posts ) && !empty( $gallery->posts ) && $gallery->post_
 		<?php
 		$show_readmore = $instance['show_readmore'];
 		$btn_text      = esc_html__( 'View More', 'eduma' );
-		if ( $show_readmore == true ) {
+		if ( $show_readmore ) {
 			echo '<div class="read-more">';
 			echo '<a class="thim-button" href="' . esc_url( home_url( '/' ) ) . 'portfolio/">' . $btn_text . '</a>';
 			echo '</div>';

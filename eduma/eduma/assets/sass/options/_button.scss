@@ -46,6 +46,7 @@ form.lp-cart .checkout-button:hover,
 .thim-search-light-style .thim-widget-courses-searching .courses-searching button:hover,
 .thim-button-checkout:hover,
 .thim-widget-courses .view-all-courses.position-bottom:hover,
+.elementor-widget-thim-courses .view-all-courses.position-bottom:hover,
 .woocommerce .add_to_cart_button.ajax_add_to_cart:hover,
 #your-profile input[type=submit]:hover,
 #course-curriculum-popup #popup-header .popup-close,
@@ -64,7 +65,8 @@ body.course-item-popup #learn-press-content-item #course-item-content-header .ba
 	border-color: $thim_thim_button_hover_color;
 }
 
-.thim-university-top-icon .thim-widget-icon-box .wrapper-box-icon {
+.thim-university-top-icon .thim-widget-icon-box .wrapper-box-icon,
+.thim-university-top-icon .elementor-widget-thim-icon-box .wrapper-box-icon {
 	border-right-color: $thim_thim_button_hover_color;
 }
 
@@ -97,7 +99,9 @@ body.course-item-popup #learn-press-content-item #course-item-content-header .ba
 // thim_thim_button_text_color
 .single-quiz button.button-retake-quiz:hover,
 .thim-widget-courses .view-all-courses.position-bottom,
+.elementor-widget-thim-courses .view-all-courses.position-bottom,
 .thim-widget-courses .view-all-courses.position-bottom:hover,
+.elementor-widget-thim-courses .view-all-courses.position-bottom:hover,
 .woocommerce .actions .button:not([disabled]):hover,
 .site-header li .widget_shopping_cart .widget_shopping_cart_content .buttons a.button.wc-forward:hover,
 .site-header li .widget_shopping_cart .widget_shopping_cart_content .buttons a.button.wc-forward.checkout,
@@ -189,6 +193,7 @@ form.lp-cart .checkout-button,
 .thim-timetable-link:hover,
 .thim-button-checkout,
 .thim-widget-courses .view-all-courses.position-bottom,
+.elementor-widget-thim-courses .view-all-courses.position-bottom,
 .woocommerce .add_to_cart_button.ajax_add_to_cart:hover,
 .thim-newlleter-homepage .mc4wp-form.yikes-easy-mc-form .yikes-easy-mc-submit-button,
 .woocommerce .add_to_cart_button.ajax_add_to_cart{

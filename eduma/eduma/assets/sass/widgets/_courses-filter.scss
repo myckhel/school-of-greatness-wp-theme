@@ -12,6 +12,10 @@ form.thim-course-filter {
 	label {
 		cursor: pointer;
 		font-size: 13px;
+
+		span {
+			display: inline-block;
+		}
 	}
 
 	ul {

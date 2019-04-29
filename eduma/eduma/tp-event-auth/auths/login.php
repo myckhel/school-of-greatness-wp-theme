@@ -20,5 +20,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'label_remember' => esc_html__( 'Remember me', 'eduma' ),
 		'label_log_in'   => esc_html__( 'Login', 'eduma' ),
 	) ); ?>
-	<?php echo '<p class="link-bottom">' . esc_html__( 'Not a member yet? ', 'eduma' ) . '<a href="' . esc_url( thim_get_register_url() ) . '">' . esc_html__( 'Register now', 'eduma' ) . '</a></p>'; ?>
+	<?php echo '<p class="link-bottom">' . esc_html__( 'Not a member yet? ', 'eduma' ) . ' <a href="' . esc_url( thim_get_register_url() ) . '">' . esc_html__( 'Register now', 'eduma' ) . '</a></p>'; ?>
 </div>

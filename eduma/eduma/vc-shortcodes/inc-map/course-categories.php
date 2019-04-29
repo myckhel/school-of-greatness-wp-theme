@@ -24,7 +24,7 @@ vc_map( array(
 				esc_html__( 'Select', 'eduma' )          => '',
 				esc_html__( 'Slider', 'eduma' )          => 'slider',
 				esc_html__( 'List Categories', 'eduma' ) => 'base',
-                esc_html__( 'Tab Slider', 'eduma' ) => 'tab-slider',
+				esc_html__( 'Tab Slider', 'eduma' )      => 'tab-slider',
 			),
 		),
 
@@ -36,7 +36,7 @@ vc_map( array(
 			'std'         => '15',
 			'dependency'  => array(
 				'element' => 'layout',
-                'value'   => array('slider', 'tab-slider'),
+				'value'   => array( 'slider', 'tab-slider' ),
 			),
 			'group'       => esc_html__( 'Slider Settings', 'eduma' ),
 		),
@@ -49,7 +49,7 @@ vc_map( array(
 			'std'         => false,
 			'dependency'  => array(
 				'element' => 'layout',
-				'value'   => array('slider', 'tab-slider'),
+				'value'   => array( 'slider', 'tab-slider' ),
 			),
 			'group'       => esc_html__( 'Slider Settings', 'eduma' ),
 		),
@@ -59,11 +59,10 @@ vc_map( array(
 			'admin_label' => true,
 			'heading'     => esc_html__( 'Show Navigation', 'eduma' ),
 			'param_name'  => 'slider_show_navigation',
-			//'value'       => array( esc_html__( '', 'eduma' ) => 'yes' ),
 			'std'         => true,
 			'dependency'  => array(
 				'element' => 'layout',
-                'value'   => array('slider', 'tab-slider'),
+				'value'   => array( 'slider', 'tab-slider' ),
 			),
 			'group'       => esc_html__( 'Slider Settings', 'eduma' ),
 		),
@@ -84,9 +83,82 @@ vc_map( array(
 				esc_html__( '7', 'eduma' )      => '7',
 				esc_html__( '8', 'eduma' )      => '8',
 			),
+			'std'         => '7',
 			'dependency'  => array(
 				'element' => 'layout',
-                'value'   => array('slider', 'tab-slider'),
+				'value'   => array( 'slider', 'tab-slider' ),
+			),
+			'group'       => esc_html__( 'Slider Settings', 'eduma' ),
+		),
+
+		array(
+			'type'        => 'dropdown',
+			'admin_label' => true,
+			'heading'     => esc_html__( 'Items Small Desktop Visible', 'eduma' ),
+			'param_name'  => 'slider_item_small_desktop_visible',
+			'value'       => array(
+				esc_html__( 'Select', 'eduma' ) => '',
+				esc_html__( '1', 'eduma' )      => '1',
+				esc_html__( '2', 'eduma' )      => '2',
+				esc_html__( '3', 'eduma' )      => '3',
+				esc_html__( '4', 'eduma' )      => '4',
+				esc_html__( '5', 'eduma' )      => '5',
+				esc_html__( '6', 'eduma' )      => '6',
+				esc_html__( '7', 'eduma' )      => '7',
+				esc_html__( '8', 'eduma' )      => '8',
+			),
+			'std'         => '6',
+			'dependency'  => array(
+				'element' => 'layout',
+				'value'   => array( 'slider', 'tab-slider' ),
+			),
+			'group'       => esc_html__( 'Slider Settings', 'eduma' ),
+		),
+
+		array(
+			'type'        => 'dropdown',
+			'admin_label' => true,
+			'heading'     => esc_html__( 'Items Tablet Visible', 'eduma' ),
+			'param_name'  => 'slider_item_tablet_visible',
+			'value'       => array(
+				esc_html__( 'Select', 'eduma' ) => '',
+				esc_html__( '1', 'eduma' )      => '1',
+				esc_html__( '2', 'eduma' )      => '2',
+				esc_html__( '3', 'eduma' )      => '3',
+				esc_html__( '4', 'eduma' )      => '4',
+				esc_html__( '5', 'eduma' )      => '5',
+				esc_html__( '6', 'eduma' )      => '6',
+				esc_html__( '7', 'eduma' )      => '7',
+				esc_html__( '8', 'eduma' )      => '8',
+			),
+			'std'         => '4',
+			'dependency'  => array(
+				'element' => 'layout',
+				'value'   => array( 'slider', 'tab-slider' ),
+			),
+			'group'       => esc_html__( 'Slider Settings', 'eduma' ),
+		),
+
+		array(
+			'type'        => 'dropdown',
+			'admin_label' => true,
+			'heading'     => esc_html__( 'Items Mobile Visible', 'eduma' ),
+			'param_name'  => 'slider_item_mobile_visible',
+			'value'       => array(
+				esc_html__( 'Select', 'eduma' ) => '',
+				esc_html__( '1', 'eduma' )      => '1',
+				esc_html__( '2', 'eduma' )      => '2',
+				esc_html__( '3', 'eduma' )      => '3',
+				esc_html__( '4', 'eduma' )      => '4',
+				esc_html__( '5', 'eduma' )      => '5',
+				esc_html__( '6', 'eduma' )      => '6',
+				esc_html__( '7', 'eduma' )      => '7',
+				esc_html__( '8', 'eduma' )      => '8',
+			),
+			'std'         => '2',
+			'dependency'  => array(
+				'element' => 'layout',
+				'value'   => array( 'slider', 'tab-slider' ),
 			),
 			'group'       => esc_html__( 'Slider Settings', 'eduma' ),
 		),
@@ -100,7 +172,7 @@ vc_map( array(
 			'description' => esc_html__( 'Set 0 to disable auto play.', 'eduma' ),
 			'dependency'  => array(
 				'element' => 'layout',
-                'value'   => array('slider', 'tab-slider'),
+				'value'   => array( 'slider', 'tab-slider' ),
 			),
 			'group'       => esc_html__( 'Slider Settings', 'eduma' ),
 		),
@@ -110,7 +182,6 @@ vc_map( array(
 			'admin_label' => true,
 			'heading'     => esc_html__( 'Show course count', 'eduma' ),
 			'param_name'  => 'list_show_counts',
-			//'value'       => array( esc_html__( '', 'eduma' ) => 'yes' ),
 			'std'         => false,
 			'dependency'  => array(
 				'element' => 'layout',
@@ -123,7 +194,6 @@ vc_map( array(
 			'admin_label' => true,
 			'heading'     => esc_html__( 'Show hierarchy', 'eduma' ),
 			'param_name'  => 'list_hierarchical',
-			//'value'       => array( esc_html__( '', 'eduma' ) => 'yes' ),
 			'std'         => false,
 			'dependency'  => array(
 				'element' => 'layout',
@@ -131,14 +201,14 @@ vc_map( array(
 			),
 		),
 
-        // Extra class
-        array(
-            'type'        => 'textfield',
-            'admin_label' => true,
-            'heading'     => esc_html__( 'Extra class', 'eduma' ),
-            'param_name'  => 'el_class',
-            'value'       => '',
-            'description' => esc_html__( 'Add extra class name that will be applied to the icon box, and you can use this class for your customizations.', 'eduma' ),
-        ),
+		// Extra class
+		array(
+			'type'        => 'textfield',
+			'admin_label' => true,
+			'heading'     => esc_html__( 'Extra class', 'eduma' ),
+			'param_name'  => 'el_class',
+			'value'       => '',
+			'description' => esc_html__( 'Add extra class name that will be applied to the icon box, and you can use this class for your customizations.', 'eduma' ),
+		),
 	)
 ) );

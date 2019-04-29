@@ -117,28 +117,17 @@ if ( $posts_display->have_posts() ) {
 				//Close div grid-horizontal
 				echo '</div>';
 			}
-			if ( ( $index - 1 == $number_posts - $items_vertical ) && $items_vertical > 0 ) {
-				//Close div grid-vertical
-				echo '</div>';
-			}
 		}
-
 		$index ++;
-
 	}
 
-	echo '</div>';
+	echo '</div></div>';
 
 	//Link All Posts
 	if ( $instance['link'] <> '' ) {
 		echo '<div class="link_read_more"><a href="' . $instance['link'] . '">' . $instance['text_link'] . '</a></div>';
 	}
-
 	echo ent2ncr( $feature_html );
-
 	echo '</div>';
-
 }
 wp_reset_postdata();
-
-?>

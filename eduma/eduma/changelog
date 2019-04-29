@@ -1,3 +1,37 @@
+/* Education WP 4.0.2 - 2019-04-12 */
++ Improved responsive styles.
++ Fixed some minor bugs (missed login page in Elementor mode, pagination on Courses Page, Page Layout setting...).
+
+/* Education WP 4.0.1.1 - 2019-03-20 */
++ Fixed Coming Soon addon issue.
+
+/* Education WP 4.0.1 - 2019-03-19 */
++ Improved Elementor page builder (all demos ready).
++ Improved Gutenberg.
++ Improved style.
++ Fixed some minor bugs (outdated templates in WooCommerce 3.5.6...).
+
+/* Education WP 4.0.0 - 2019-02-19 */
++ Supported Elementor page builder (3 prebuilt demos ready).
++ Improved WordPress 5.0 compatibility.
++ Improved styles.
++ Fixed some minor bugs (Captcha issue, quiz issues...).
+
+
+/* Education WP 3.6.3 - 2018-12-21 */
++ Improved styles (responsive and RTL).
++ Fixed some minor bugs (LearnPress 3.x issues, login popup...).
+
+/* Education WP 3.6.2 - 2018-12-19 */
++ Supported Gutenberg.
++ Improved styles (with WooSale Countdown plugin and MiniOrange Social Login plugin).
++ Fixed some minor bugs (outdated templates in LearnPress 3.2.0, outdated templates in WooCommerce 3.5.2...).
+
+/* Education WP 3.6.1.1 - 2018-11-27 */
++ Updated language.
++ Improved styles (menu on mobile, responsive, RTL...).
++ Fixed some minor bugs (duplicate registration email...).
+
 /* Education WP 3.6.1 - 2018-11-23 */
 + Added Courses Filter.
 + Improved Google Captcha integration.

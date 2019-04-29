@@ -32,9 +32,10 @@ if ( class_exists( 'Thim_Widget' ) ) {
 		include_once( THIM_DIR . '/inc/widgets/courses-searching/courses-searching.php' );
 		include_once( THIM_DIR . '/inc/widgets/course-categories/course-categories.php' );
 		include_once( THIM_DIR . '/inc/widgets/courses/courses.php' );
+
         if ( thim_plugin_active( 'learnpress-co-instructor/learnpress-co-instructor.php' ) ) {
             include_once(THIM_DIR . '/inc/widgets/one-course-instructors/one-course-instructors.php');
-            include_once(THIM_DIR . '/inc/widgets/list-instructors/list-instructors.php');
+	        include_once(THIM_DIR . '/inc/widgets/list-instructors/list-instructors.php');
         }
         if ( thim_plugin_active( 'learnpress-collections/learnpress-collections.php' ) ) {
             include_once( THIM_DIR . '/inc/widgets/courses-collection/courses-collection.php' );

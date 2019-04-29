@@ -14,12 +14,17 @@
  */
 defined( 'ABSPATH' ) || exit();
 
-$user      = LP_Global::user();
-$quiz      = LP_Global::course_item_quiz();
-$course_id = get_the_ID();
+$user                = LP_Global::user();
+$quiz                = LP_Global::course_item_quiz();
+$course_id           = get_the_ID();
+$current_question_id = $quiz->get_viewing_question( 'id' );
+$prev_id = $quiz->get_prev_question($current_question_id);
+$next_id = $quiz->get_next_question($current_question_id);
+$user_prev_question_id = $user->get_prev_question( $quiz->get_id(), $course_id );
+// $user_next_question_id = $user->get_next_question( $quiz->get_id(), $course_id );
 ?>
 <div class="quiz-buttons">
-    <?php if ( $prev_id = $user->get_prev_question( $quiz->get_id(), $course_id ) ) { ?>
+    <?php if ( $prev_id  ) { ?>
 
         <?php do_action( 'learn-press/quiz/before-prev-question-button' ); ?>
 
@@ -29,6 +34,7 @@ $course_id = get_the_ID();
             <?php do_action( 'learn-press/quiz/begin-prev-question-button' ); ?>
 
             <button type="submit"><?php _e( 'Prev', 'eduma' ); ?></button>
+	        <input type="hidden" name="question-id" value="<?php echo $current_question_id; ?>">
 
             <?php do_action( 'learn-press/quiz/end-prev-question-button' ); ?>
 
@@ -39,7 +45,7 @@ $course_id = get_the_ID();
 
     <?php } ?>
 
-    <?php if ( $next_id = $user->get_next_question( $quiz->get_id(), $course_id ) ) { ?>
+<?php if ( $next_id ) { ?>
 
         <?php do_action( 'learn-press/quiz/before-next-question-button' ); ?>
 
@@ -49,6 +55,7 @@ $course_id = get_the_ID();
             <?php do_action( 'learn-press/quiz/begin-next-question-button' ); ?>
 
             <button type="submit"><?php _e( 'Next', 'eduma' ); ?></button>
+	        <input type="hidden" name="question-id" value="<?php echo $current_question_id; ?>">
 
             <?php do_action( 'learn-press/quiz/end-next-question-button' ); ?>
 
@@ -59,7 +66,7 @@ $course_id = get_the_ID();
 
     <?php } ?>
 
-    <?php if ( ($next_id = $user->get_next_question( $quiz->get_id(), $course_id )) && ! $user->has_completed_quiz( $quiz->get_id(), $course_id ) ) { ?>
+<?php if ( $next_id  && ! $user->has_completed_quiz( $quiz->get_id(), $course_id ) ) { ?>
 
         <?php do_action( 'learn-press/quiz/before-skip-question-button' ); ?>
 
@@ -69,6 +76,7 @@ $course_id = get_the_ID();
             <?php do_action( 'learn-press/quiz/begin-skip-question-button' ); ?>
 
             <button type="submit"><?php _e( 'Skip', 'eduma' ); ?></button>
+	        <input type="hidden" name="question-id" value="<?php echo $current_question_id; ?>">
 
             <?php do_action( 'learn-press/quiz/end-skip-question-button' ); ?>
 
@@ -79,6 +87,3 @@ $course_id = get_the_ID();
 
     <?php } ?>
 </div>
-
-
-

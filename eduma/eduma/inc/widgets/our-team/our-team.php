@@ -8,7 +8,7 @@ class Thim_Our_Team_Widget extends Thim_Widget {
 			'our-team',
 			esc_html__( 'Thim: Our Team', 'eduma' ),
 			array(
-				'description'   => esc_html__( '', 'eduma' ),
+				'description'   => '',
 				'help'          => '',
 				'panels_groups' => array( 'thim_widget_group' ),
 				'panels_icon'   => 'thim-widget-icon thim-widget-icon-our-team'
@@ -16,10 +16,11 @@ class Thim_Our_Team_Widget extends Thim_Widget {
 			array(),
 			array(
 				'cat_id'      => array(
-					'type'    => 'select',
-					'label'   => esc_html__( 'Select Category', 'eduma' ),
-					'default' => 'all',
-					'options' => $this->thim_get_team_categories(),
+					'type'     => 'select',
+					'label'    => esc_html__( 'Select Category', 'eduma' ),
+					'default'  => 'all',
+					'multiple' => false,
+					'options'  => $this->thim_get_team_categories()
 				),
 				'number_post' => array(
 					'type'    => 'number',
@@ -117,9 +118,9 @@ class Thim_Our_Team_Widget extends Thim_Widget {
 
 		$cats        = array();
 		$cats['all'] = esc_html__( 'All', 'eduma' );
-		if ( !empty( $query ) ) {
+		if ( ! empty( $query ) ) {
 			foreach ( $query as $key => $value ) {
-				$cats[$value->term_id] = $value->name;
+				$cats[ $value->term_id ] = $value->name;
 			}
 		}
 
@@ -127,7 +128,7 @@ class Thim_Our_Team_Widget extends Thim_Widget {
 	}
 
 	function get_template_name( $instance ) {
-		if ( !empty( $instance['layout'] ) ) {
+		if ( ! empty( $instance['layout'] ) ) {
 			return $instance['layout'];
 		} else {
 			return 'base';

@@ -411,6 +411,13 @@ if ( !function_exists( 'thim_about_author' ) ) {
 							</li>
 						<?php endif; ?>
 
+                        <?php if ( isset( $lp_info['instagram'] ) && $lp_info['instagram'] ) : ?>
+                            <li>
+                                <a href="<?php echo esc_url( $lp_info['instagram'] ); ?>" class="instagram"><i
+                                            class="fa fa-instagram"></i></a>
+                            </li>
+                        <?php endif; ?>
+
 						<?php if ( isset( $lp_info['linkedin'] ) && $lp_info['linkedin'] ) : ?>
 							<li>
 								<a href="<?php echo esc_url( $lp_info['linkedin'] ); ?>" class="linkedin"><i class="fa fa-linkedin"></i></a>

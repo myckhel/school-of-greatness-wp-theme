@@ -84,7 +84,7 @@ do_action( 'learn-press/archive-description' );
 				<select name="orderby">
 					<?php
 					foreach ( $default_order as $k => $v ) {
-						echo '<option value="' . esc_attr( $k ) . '" ' . selected( $k, $_POST['course_orderby'] ) . '>' . ( $v ) . '</option>';
+						echo '<option value="' . esc_attr( $k ) . '">' . ( $v ) . '</option>';
 					}
 					?>
 				</select>

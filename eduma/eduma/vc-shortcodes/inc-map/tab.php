@@ -45,7 +45,7 @@ vc_map( array(
                     'admin_label' => false,
                     'heading'     => esc_html__( 'Background Title', 'eduma' ),
                     'param_name'  => 'bg_title',
-                    'value'       => esc_html__( '', 'eduma' ),
+                    'value'       => '',
                     'description' => esc_html__( 'Select the color background for title.', 'eduma' ),
                 ),
                 array(

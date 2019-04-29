@@ -88,6 +88,13 @@
 			line-height: 52px;
 		}
 	}
+
+	.video-title,
+	.video-description,
+	.button-popup {
+		min-height: 1px !important;
+	}
+
 	&.image-layout {
 		display: inline-block;
 		.video-info {
@@ -127,5 +134,14 @@
 		&:before {
 			display: none;
 		}
+	}
+}
+
+@media (min-width: 768px) {
+	.elementor-12 .width-68.elementor-element.elementor-element-5dcce16 {
+		width: 68%;
+	}
+	.elementor-12 .width-43.elementor-element.elementor-element-ef7f256 {
+		width: 43%
 	}
 }

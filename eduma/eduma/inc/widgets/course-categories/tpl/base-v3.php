@@ -18,11 +18,16 @@ $args_cat = array(
 
 <?php
 $cats = get_categories( $args_cat );
+
 ?>
 <ul>
     <?php foreach( $cats as $category ) {?>
         <li>
             <a href="<?php echo esc_url( get_term_link( $category->term_id ) );?>"><?php echo $category->name;?></a>
+            <?php
+                if ( $instance['list-options']['show_counts'] == true ) { ?>
+                    <span>(<?php echo $category->count;?>)</span>
+                <?php } ?>
             <?php
             $args_cat_child = array(
                 'show_count'   => $show_count,
